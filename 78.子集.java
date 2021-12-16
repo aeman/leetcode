@@ -11,17 +11,17 @@ import java.util.List;
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
-        ans.add(new ArrayList<>()); // 空子集
-
-        for (int i = 0; i < nums.length; i++) {
-            int all = ans.size();
-            for (int j = 0; j < all; j++) {
-                List<Integer> tmp = new ArrayList<>(ans.get(j));
-                tmp.add(nums[i]);
-                ans.add(tmp);
-            }
-        }
+        backtrack(ans, new ArrayList<>(), 0, nums);
         return ans;
+    }
+
+    public void backtrack(List<List<Integer>> ans, List<Integer> list, int pos, int[] nums) {
+        ans.add(new ArrayList<>(list));
+        for (int i = pos; i < nums.length; i++) {
+            list.add(nums[i]);
+            backtrack(ans, list, i + 1, nums);
+            list.remove(list.size() - 1);
+        }
     }
 }
 // @lc code=end
