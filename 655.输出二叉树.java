@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javax.swing.tree.TreeNode;
-
 /*
  * @lc app=leetcode.cn id=655 lang=java
  *
