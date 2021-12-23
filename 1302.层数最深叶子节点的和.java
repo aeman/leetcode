@@ -21,8 +21,27 @@
  * }
  */
 class Solution {
-    public int deepestLeavesSum(TreeNode root) {
+    private int sum;
+    private int maxLevel;
 
+    public int deepestLeavesSum(TreeNode root) {
+        calMaxLevelSum(root, 0);
+        return sum;
+    }
+
+    public void calMaxLevelSum(TreeNode root, int level) {
+        if (root == null) return;
+
+        if (level > maxLevel) {
+            sum = 0;
+            maxLevel = level;
+        }
+        if (level == maxLevel) {
+            sum += root.val;
+        }
+
+        calMaxLevelSum(root.left, level + 1);
+        calMaxLevelSum(root.right, level + 1);
     }
 }
 // @lc code=end
