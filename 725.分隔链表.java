@@ -15,7 +15,30 @@
  */
 class Solution {
     public ListNode[] splitListToParts(ListNode root, int k) {
+        ListNode[] parts = new ListNode[k];
 
+        //计算链表长度
+        int length = 0;
+        ListNode temp = root;
+        while (temp != null) {
+            length++;
+            temp = temp.next;
+        }
+
+        int div = length / k, remain = length % k;
+        
+        for (int i = 0; i < k && root != null; i++) {
+            parts[i] = root;
+            int size = div + (remain > i ? 1 : 0);
+            for (int j = 1; j < size; j++) {
+                root = root.next;
+            }
+            temp = root.next;
+            root.next = null;
+            root = temp;
+        }
+
+        return parts;
     }
 }
 // @lc code=end
