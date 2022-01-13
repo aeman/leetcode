@@ -32,7 +32,23 @@
  */
 class Solution {
     public TreeNode sortedListToBST(ListNode head) {
+        return buildTree(head, null);
+    }
 
+    public TreeNode buildTree(ListNode head, ListNode tail) {
+        ListNode fast = head;
+        ListNode slow = head;
+        if (head == tail) return null;
+
+        while (fast != tail && fast.next != tail) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        TreeNode node = new TreeNode(slow.val);
+        node.left = buildTree(head, slow);
+        node.right = buildTree(slow.next, tail);
+        return node;
     }
 }
 // @lc code=end
