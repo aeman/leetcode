@@ -24,7 +24,8 @@ class Solution {
                 sorted = sorted.next;
             } else {
                 ListNode d = dummy;
-                while (d.next != null && d.next.val < cur.val) {
+                //找到插入节点的位置
+                while (d != null && d.next.val < cur.val) {
                     d = d.next;
                 }
                 sorted.next = cur.next;
