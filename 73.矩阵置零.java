@@ -10,6 +10,7 @@ import java.util.Arrays;
 class Solution {
     public void setZeroes(int[][] matrix) {
         int m = matrix.length, n = matrix[0].length, k = 0;
+        // 判断第一行是否有0
         while (k < n && matrix[0][k] != 0) k++;
 
         for (int i = 1; i < m; i++) {
@@ -21,6 +22,7 @@ class Solution {
             }
         }
 
+        // 遍历矩阵设置0
         for (int i = 1; i < m; i++) {
             for (int j = n-1; j >= 0; j--) {
                 if (matrix[0][j] == 0 || matrix[i][0] == 0) {
