@@ -1,8 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.print.DocFlavor.INPUT_STREAM;
-
 /*
  * @lc app=leetcode.cn id=169 lang=java
  *
@@ -13,21 +11,19 @@ import javax.print.DocFlavor.INPUT_STREAM;
 class Solution {
     public int majorityElement(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (!map.containsKey(nums[i])) {
-                map.put(nums[i], 1);
+
+        for (int num : nums) {
+            if (!map.containsKey(num)) {
+                map.put(num, 1);
             } else {
-                map.put(nums[i], map.get(nums[i]) + 1);
+                map.put(num, map.get(num) + 1);
             }
-        }
-        Map.Entry<Integer, Integer> major = null;
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            if (major == null || entry.getValue() > major.getValue()) {
-                major = entry;
+            if (map.get(num) > nums.length / 2) {
+                return num;
             }
         }
 
-        return major.getKey();
+        return -1;
     }
 }
 // @lc code=end
