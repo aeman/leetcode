@@ -6,8 +6,6 @@
 
 // @lc code=start
 class Solution {
-    int[] ans;
-
     public int climbStairs(int n) {
         if (n < 2) return n;
         
