@@ -1,6 +1,5 @@
-import java.util.Stack;
-
-import javax.lang.model.util.ElementScanner6;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /*
  * @lc app=leetcode.cn id=150 lang=java
@@ -11,31 +10,31 @@ import javax.lang.model.util.ElementScanner6;
 // @lc code=start
 class Solution {
     public int evalRPN(String[] tokens) {
-        int a, b;
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < tokens.length; i++) {
-            if (tokens[i].equals("+")) {
-                a = stack.pop();
-                b = stack.pop();
-                stack.push(a + b);
-            } else if (tokens[i].equals("-")) {
-                a = stack.pop();
-                b = stack.pop();
-                stack.push(b - a);
-            } else if (tokens[i].equals("*")) {
-                a = stack.pop();
-                b = stack.pop();
-                stack.push(a * b);
-            } else if (tokens[i].equals("/")) {
-                a = stack.pop();
-                b = stack.pop();
-                stack.push(b / a);                
+        int x, y;
+        Deque<Integer> stack = new ArrayDeque<>();
+        
+        for (String token : tokens) {
+            if (token.equals("+")) {
+                x = stack.pop();
+                y = stack.pop();
+                stack.push(x + y);
+            } else if (token.equals("-")) {
+                x = stack.pop();
+                y = stack.pop();
+                stack.push(y - x);
+            } else if (token.equals("*")) {
+                x = stack.pop();
+                y = stack.pop();
+                stack.push(x * y);
+            } else if (token.equals("/")) {
+                x = stack.pop();
+                y = stack.pop();
+                stack.push(y / x);
             } else {
-                stack.push(Integer.parseInt(tokens[i]));
+                stack.push(Integer.parseInt(token));
             }
         }
         return stack.pop();
     }
 }
 // @lc code=end
-
