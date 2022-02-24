@@ -7,14 +7,16 @@
 // @lc code=start
 class Solution {
     public int removeElement(int[] nums, int val) {
-        int left = 0;
+        int length = 0;
+
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] != val) {
-                nums[left] = nums[i];
-                left++;
+                nums[length] = nums[i];
+                length++;
             }
         }
-        return left;
+        
+        return length;
     }
 }
 // @lc code=end
