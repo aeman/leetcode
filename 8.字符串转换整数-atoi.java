@@ -8,10 +8,12 @@
 class Solution {
     public int myAtoi(String s) {
         String trim = s.trim();
-        if (trim.length() == 0) return 0;
+        if (trim.length() == 0)
+            return 0;
 
         char[] chars = trim.toCharArray();
-        if (!Character.isDigit(chars[0]) && chars[0] != '+' && chars[0] != '-') return 0;
+        if (!Character.isDigit(chars[0]) && chars[0] != '+' && chars[0] != '-')
+            return 0;
 
         int begin = 0;
         boolean symbol = true;
@@ -25,7 +27,8 @@ class Solution {
         int ans = 0, last = 0;
         for (int i = begin; i < chars.length; i++) {
             last = ans;
-            if (!Character.isDigit(chars[i])) break;
+            if (!Character.isDigit(chars[i]))
+                break;
             ans = ans * 10 + (chars[i] - '0');
             if (ans / 10 != last) {
                 return symbol ? Integer.MAX_VALUE : Integer.MIN_VALUE;
@@ -35,4 +38,3 @@ class Solution {
     }
 }
 // @lc code=end
-
