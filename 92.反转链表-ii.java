@@ -17,25 +17,23 @@
  */
 class Solution {
     public ListNode reverseBetween(ListNode head, int left, int right) {
-        ListNode vNode = new ListNode(0, head);
-        ListNode pre = vNode;
+        ListNode dummy = new ListNode(0, head), pre = dummy;
 
         //找到反转的起始位置
         for (int i = 0; i < left - 1; i++) {
             pre = pre.next;
         }
 
-        ListNode begin = pre.next;
-        ListNode second = begin.next;
+        ListNode cur = pre.next, temp = cur.next;
 
         for (int i = 0; i < right - left; i++) {
-            begin.next = second.next;
-            second.next = pre.next;
-            pre.next = second;
-            second = begin.next;
+            cur.next = temp.next;
+            temp.next = pre.next;
+            pre.next = temp;
+            temp = cur.next;
         }
 
-        return vNode.next;
+        return dummy.next;
     }
 }
 // @lc code=end

@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=143 lang=java
+ * @lc app=leetcode.cn id=234 lang=java
  *
- * [143] 重排链表
+ * [234] 回文链表
  */
 
 // @lc code=start
@@ -16,22 +16,18 @@
  * }
  */
 class Solution {
-    public void reorderList(ListNode head) {
-        // ListNode[] left = new ListNode[1];
-        // left[0] = head;
-        // reorder(left, head);
-
-        ListNode mid = findMid(head), midNext = mid.next;
+    public boolean isPalindrome(ListNode head) {
+        ListNode mid = findMid(head), p1 = head;
         mid.next = null;
-        ListNode p2 = reverse(midNext);
+        ListNode p2 = reverse(mid.next);
 
-        ListNode p1 = head, temp;
         while (p1 != null && p2 != null) {
-            temp = p1.next;
-            p1.next = p2;
+            if (p1.val != p2.val) return false;
             p1 = p1.next;
-            p2 = temp;
+            p2 = p2.next;
         }
+
+        return true;
     }
 
     public ListNode findMid(ListNode head) {
@@ -53,22 +49,6 @@ class Solution {
         }
         return pre;
     }
-
-    // public void reorder(ListNode left[], ListNode right) {
-    //     if (right == null) return;
-    //     reorder(left, right.next);
-
-    //     if (left[0].next != null) {
-    //         ListNode leftNext = left[0].next;
-    //         left[0].next = right;
-    //         right.next = leftNext;
-    //         left[0] = leftNext;
-    //     }
-
-    //     if (left[0].next == right) {
-    //         left[0].next = null;
-    //     }
-    // }
 }
 // @lc code=end
 

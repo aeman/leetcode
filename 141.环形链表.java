@@ -1,5 +1,3 @@
-import java.util.HashSet;
-
 /*
  * @lc app=leetcode.cn id=141 lang=java
  *
@@ -18,7 +16,7 @@ import java.util.HashSet;
  *     }
  * }
  */
-public class Solution {
+class Solution {
     public boolean hasCycle(ListNode head) {
         // Set<ListNode> set = new HashSet<>();
         // while (head != null) {

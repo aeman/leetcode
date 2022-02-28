@@ -19,7 +19,7 @@ import java.util.Set;
  *     }
  * }
  */
-public class Solution {
+class Solution {
     public ListNode detectCycle(ListNode head) {
         ListNode pos = head;
         Set<ListNode> set = new HashSet<>();
