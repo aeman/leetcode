@@ -1,5 +1,3 @@
-import java.util.Comparator;
-import java.util.List;
 import java.util.PriorityQueue;
 
 /*
@@ -27,23 +25,16 @@ class Solution {
         // }
         // return ans;
         if (lists == null || lists.length == 0) return null;
-        PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, new Comparator<ListNode>() {
-            @Override
-            public int compare(ListNode o1, ListNode o2) {
-                if (o1.val < o2.val) return -1;
-                else if (o1.val == o2.val) return 0;
-                else return 1;
-            }
-        });
-        ListNode dummy = new ListNode(0);
-        ListNode p = dummy;
+        PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, (o1, o2) -> o1.val < o2.val ? -1 : 1);
+
+        ListNode dummy = new ListNode(0), cur = dummy;
         for (ListNode node : lists) {
             if (node != null) queue.add(node);
         }
         while (!queue.isEmpty()) {
-            p.next = queue.poll();
-            p = p.next;
-            if (p.next != null) queue.add(p.next);
+            cur.next = queue.poll();
+            cur = cur.next;
+            if (cur.next != null) queue.add(cur.next);
         }
         return dummy.next;
     }

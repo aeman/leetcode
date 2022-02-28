@@ -23,14 +23,14 @@ class Solution {
             if (sorted.val <= cur.val) {
                 sorted = sorted.next;
             } else {
-                ListNode d = dummy;
+                ListNode temp = dummy;
                 //找到插入节点的位置
-                while (d != null && d.next.val < cur.val) {
-                    d = d.next;
+                while (temp != null && temp.next.val < cur.val) {
+                    temp = temp.next;
                 }
                 sorted.next = cur.next;
-                cur.next = d.next;
-                d.next = cur;
+                cur.next = temp.next;
+                temp.next = cur;
             }
             cur = sorted.next;
         }

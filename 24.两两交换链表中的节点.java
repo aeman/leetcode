@@ -17,16 +17,16 @@
  */
 class Solution {
     public ListNode swapPairs(ListNode head) {
-        ListNode dummy = new ListNode(0, head), temp = dummy;
+        ListNode dummy = new ListNode(0, head), cur = dummy;
 
-        while (temp.next != null && temp.next.next != null) {
-            ListNode first = temp.next;
-            ListNode second = temp.next.next;
-            temp.next = second;
+        while (cur.next != null && cur.next.next != null) {
+            ListNode first = cur.next;
+            ListNode second = cur.next.next;
+            cur.next = second;
             first.next = second.next;
             second.next = first;
             
-            temp = first;
+            cur = first;
         }
         return dummy.next;
     }
