@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=104 lang=java
+ * @lc app=leetcode.cn id=111 lang=java
  *
- * [104] 二叉树的最大深度
+ * [111] 二叉树的最小深度
  */
 
 // @lc code=start
@@ -21,12 +21,13 @@
  * }
  */
 class Solution {
-    public int maxDepth(TreeNode root) {
+    public int minDepth(TreeNode root) {
         if (root == null) return 0;
-        int lh = maxDepth(root.left);
-        int rh = maxDepth(root.right);
+        int lh = minDepth(root.left);
+        int rh = minDepth(root.right);
 
-        return Math.max(lh, rh)  + 1;
+        if (lh == 0 || rh == 0) return lh + rh + 1;
+        return Math.min(lh, rh)  + 1;
     }
 }
 // @lc code=end
