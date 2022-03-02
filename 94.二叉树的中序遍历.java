@@ -26,16 +26,16 @@ import java.util.List;
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
-        postorder(root, ans);
+        inorder(root, ans);
         return ans;
     }
 
-    private void postorder(TreeNode root, List<Integer> ans) {
+    private void inorder(TreeNode root, List<Integer> ans) {
         if (root == null) return;
         
-        postorder(root.left, ans);
+        inorder(root.left, ans);
         ans.add(root.val);
-        postorder(root.right, ans);
+        inorder(root.right, ans);
     }
 }
 // @lc code=end
