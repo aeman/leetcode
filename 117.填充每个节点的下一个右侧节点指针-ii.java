@@ -1,8 +1,6 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import com.sun.corba.se.impl.orbutil.graph.Node;
-
 /*
  * @lc app=leetcode.cn id=117 lang=java
  *
@@ -41,15 +39,15 @@ class Solution {
         stack.offer(root);
 
         while (!stack.isEmpty()) {
-            Node pre = null;
+            Node cur = null;
             for (int i = 0, n = stack.size(); i < n; i++) {
-                Node cur = stack.pollFirst();
+                Node node = stack.poll();
                 
-                if (cur.right != null) stack.offer(cur.right);
-                if (cur.left != null) stack.offer(cur.left);
+                if (node.right != null) stack.offer(node.right);
+                if (node.left != null) stack.offer(node.left);
                 
-                cur.next = pre;
-                pre = cur;
+                node.next = cur;
+                cur = node;
             }
         }
 
