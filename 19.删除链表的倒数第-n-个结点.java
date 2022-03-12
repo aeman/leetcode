@@ -18,8 +18,7 @@
  */
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode vnode = new ListNode(0, head);
-        ListNode slow = vnode, fast = vnode;
+        ListNode dummy = new ListNode(-1, head), slow = dummy, fast = dummy;
 
         for (int i = 0; i < n + 1; i++) {
             fast = fast.next;
@@ -32,7 +31,7 @@ class Solution {
 
         // 删除倒数第n的节点
         slow.next = slow.next.next;
-        return vnode.next;
+        return dummy.next;
     }
 }
 // @lc code=end

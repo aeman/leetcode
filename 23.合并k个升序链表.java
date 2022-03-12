@@ -1,4 +1,5 @@
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 /*
  * @lc app=leetcode.cn id=23 lang=java
@@ -25,16 +26,19 @@ class Solution {
         // }
         // return ans;
         if (lists == null || lists.length == 0) return null;
-        PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, (o1, o2) -> o1.val < o2.val ? -1 : 1);
+        Queue<ListNode> queue = new PriorityQueue<>(lists.length, (o1, o2) -> o1.val - o2.val);
 
         ListNode dummy = new ListNode(0), cur = dummy;
         for (ListNode node : lists) {
-            if (node != null) queue.add(node);
+            if (node != null) queue.offer(node);
         }
+        
         while (!queue.isEmpty()) {
-            cur.next = queue.poll();
+            ListNode node = queue.poll();
+            cur.next = node;
+            if (node.next != null) queue.offer(node.next);
+
             cur = cur.next;
-            if (cur.next != null) queue.add(cur.next);
         }
         return dummy.next;
     }
