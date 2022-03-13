@@ -9,35 +9,29 @@ import java.util.Queue;
 
 // @lc code=start
 class MyStack {
-    private Queue<Integer> input;
-    private Queue<Integer> output;
+    private Queue<Integer> queue;
 
     public MyStack() {
-        input = new LinkedList<>();
-        output = new LinkedList<>();
+        queue = new LinkedList<>();
     }
     
     public void push(int x) {
-        output.offer(x);
-        while (!input.isEmpty()) {
-            output.offer(input.poll());
+        queue.offer(x);
+        for (int i = 0; i < queue.size() - 1; i++) {
+            queue.offer(queue.poll());
         }
-
-        Queue<Integer> temp = input;
-        input = output;
-        output = temp;
     }
     
     public int pop() {
-        return input.poll();
+        return queue.poll();
     }
     
     public int top() {
-        return input.peek();
+        return queue.peek();
     }
     
     public boolean empty() {
-        return input.isEmpty();
+        return queue.isEmpty();
     }
 }
 
