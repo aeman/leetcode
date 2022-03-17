@@ -40,6 +40,7 @@ class Solution {
 		if (postLeft > postRight || preLeft > preRight) return null;
 		
         TreeNode root = new TreeNode(preorder[preLeft]);
+        // 关键一句
         if (preLeft == preRight) return root;
 		int index = map.get(preorder[preLeft + 1]);
         int numsLeft = index - postLeft;
