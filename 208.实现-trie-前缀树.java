@@ -6,13 +6,8 @@
 
 // @lc code=start
 class Trie {
-    private Trie[] children;
+    private Trie[] children = new Trie[26];
     private boolean isEnd;
-
-    public Trie() {
-        children = new Trie[26];
-        isEnd = false;
-    }
 
     public void insert(String word) {
         Trie node = this;
