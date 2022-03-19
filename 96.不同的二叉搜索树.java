@@ -1,10 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.print.attribute.HashAttributeSet;
-
-import org.xml.sax.HandlerBase;
-
 /*
  * @lc app=leetcode.cn id=96 lang=java
  *
