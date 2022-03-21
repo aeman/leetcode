@@ -9,40 +9,43 @@ import java.util.List;
 
 // @lc code=start
 class Solution {
-    private int[] parent;
+    private boolean ans = true;
 
     public boolean possibleBipartition(int n, int[][] dislikes) {
-        parent = new int[n];
+        boolean[] color = new boolean[n + 1], visited = new boolean[n + 1];
+        List<Integer>[] graph = buildGraph(n, dislikes);
 
-        List<Integer>[] dis = new List[n];
-        for (int i = 0; i < n; ++i) {
-            parent[i] = i;
-            dis[i] = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            if (!visited[i]) dfs(graph, i, color, visited);
         }
 
-        for (int[] d : dislikes) {
-            int a = d[0] - 1, b = d[1] - 1;
-            dis[a].add(b);
-            dis[b].add(a);
-        }
-
-        for (int i = 0; i < n; ++i) {
-            for (int j : dis[i]) {
-                if (find(i) == find(j)) {
-                    return false;
-                }
-                parent[find(j)] = find(dis[i].get(0));
-            }
-        }
-        
-        return true;
+        return ans;
     }
 
-    private int find(int x) {
-        if (parent[x] != x) {
-            parent[x] = find(parent[x]);
+    private List<Integer>[] buildGraph(int n, int[][] dislikes) {
+        List<Integer>[] graph = new List[n + 1];
+        for (int i = 0; i <= n; i++) {
+            graph[i] = new ArrayList<>();
         }
-        return parent[x];
+        for (int[] edge : dislikes) {
+            graph[edge[0]].add(edge[1]);
+            graph[edge[1]].add(edge[0]);
+        }
+        return graph;
+    }
+
+    private void dfs(List<Integer>[] graph, int i, boolean[] color, boolean[] visited) {
+        if (ans == false) return;
+
+        visited[i] = true;
+        for (int j : graph[i]) {
+            if (!visited[j]) {
+                color[j] = !color[i];
+                dfs(graph, j, color, visited);
+            } else {
+                if (color[i] == color[j]) ans = false;
+            }
+        }
     }
 }
 // @lc code=end
