@@ -18,9 +18,9 @@ class Solution {
             adj[i] = new ArrayList<Integer>();
         }
         boolean[] visit = new boolean[n];
-        for (int[] v : edges) {
-            adj[v[0]].add(v[1]);
-            adj[v[1]].add(v[0]);
+        for (int[] edge : edges) {
+            adj[edge[0]].add(edge[1]);
+            adj[edge[1]].add(edge[0]);
         }
 
         Queue<Integer> queue = new ArrayDeque<>();
@@ -32,14 +32,14 @@ class Solution {
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 int curr = queue.poll();
-                for (int v : adj[curr]) {
-                    if (visit[v]) {
+                for (int edge : adj[curr]) {
+                    if (visit[edge]) {
                         continue;
                     }
-                    queue.offer(v);
-                    int time = patience[v] * ((2 * dist - 1) / patience[v]) + 2 * dist + 1;
+                    queue.offer(edge);
+                    int time = patience[edge] * ((2 * dist - 1) / patience[edge]) + 2 * dist + 1;
                     ans = Math.max(ans, time);
-                    visit[v] = true;
+                    visit[edge] = true;
                 }
             }
             dist++;
