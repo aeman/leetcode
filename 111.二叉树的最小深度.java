@@ -1,3 +1,6 @@
+import java.util.Deque;
+import java.util.LinkedList;
+
 /*
  * @lc app=leetcode.cn id=111 lang=java
  *
@@ -22,12 +25,41 @@
  */
 class Solution {
     public int minDepth(TreeNode root) {
-        if (root == null) return 0;
-        int lh = minDepth(root.left);
-        int rh = minDepth(root.right);
+        // return dfs(root);
+        return bfs(root);
+    }
 
-        if (lh == 0 || rh == 0) return lh + rh + 1;
-        return Math.min(lh, rh)  + 1;
+    private int bfs(TreeNode root) {
+        if (root == null) return 0;
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int depth = 1;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                // 到达第一个叶子节点，找到最小深度
+                if (node.left == null && node.right == null) return depth;
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+            }
+            depth++;
+        }
+
+        return depth;
+    }
+
+    private int dfs(TreeNode root) {
+        if (root == null) return 0;
+        if (root.left == null && root.right == null) return 1;
+
+        int left = dfs(root.left);
+        int right = dfs(root.right);
+        if (root.left == null) return right + 1;
+        if (root.right == null) return left + 1;
+
+        return Math.min(left, right) + 1;
     }
 }
 // @lc code=end
