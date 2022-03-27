@@ -48,17 +48,17 @@ class Solution {
     }
 
     private List<String> getStatus(String status) {
-        List<String> next = new ArrayList<>();
+        List<String> nexts = new ArrayList<>();
         char[] cs = status.toCharArray();
         for (int i = 0; i < cs.length; i++) {
             char c = cs[i];
             cs[i] = left(c);
-            next.add(new String(cs));
+            nexts.add(new String(cs));
             cs[i] = right(c);
-            next.add(new String(cs));
+            nexts.add(new String(cs));
             cs[i] = c;
         }
-        return next;
+        return nexts;
     }
 
     private char right(char c) {
