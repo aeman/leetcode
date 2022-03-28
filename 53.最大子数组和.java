@@ -21,8 +21,7 @@ class Solution {
         // }
 
         //先排序，然后找出最大值
-        Arrays.sort(dp);
-        return dp[n-1];
+        return Arrays.stream(dp).max().getAsInt();
     }
 }
 // @lc code=end

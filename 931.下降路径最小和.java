@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /*
  * @lc app=leetcode.cn id=931 lang=java
  *
@@ -10,7 +12,6 @@ class Solution {
 
     public int minFallingPathSum(int[][] matrix) {
         int n = matrix.length;
-        int ans = Integer.MAX_VALUE;
 
         memo = new int[n][n];
         for (int i = 0; i < n; i++) {
@@ -30,12 +31,8 @@ class Solution {
             }
         }
 
-        for (int i = 0; i < n; i++) {
-            if (memo[n - 1][i] < ans) {
-                ans = memo[n - 1][i];
-            }
-        }
-        return ans;
+        // 从最后一行找到最小值返回
+        return Arrays.stream(memo[n -1]).min().getAsInt();
     }
 }
 // @lc code=end

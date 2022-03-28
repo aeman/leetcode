@@ -21,8 +21,7 @@ class Solution {
             }
         }
 
-        Arrays.sort(dp);
-        return dp[n - 1];
+        return Arrays.stream(dp).max().getAsInt();
     }
 }
 // @lc code=end
