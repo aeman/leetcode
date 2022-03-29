@@ -9,8 +9,8 @@ class Solution {
     public boolean isMatch(String s, String p) {
         int m = s.length(), n = p.length();
         boolean[][] dp = new boolean[m + 1][n + 1];
-        dp[0][0] = true;
 
+        dp[0][0] = true;
         for (int i = 1; i <= n; i++) {
             if (p.charAt(i - 1) == '*') {
                 dp[0][i] = true;
