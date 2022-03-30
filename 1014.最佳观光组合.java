@@ -19,8 +19,7 @@ class Solution {
             maxValue = Math.max(maxValue, values[i] + i);
         }
 
-        Arrays.sort(dp);
-        return dp[n - 1];
+        return Arrays.stream(dp).max().getAsInt();
     }
 }
 // @lc code=end
