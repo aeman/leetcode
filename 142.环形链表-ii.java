@@ -21,17 +21,37 @@ import java.util.Set;
  */
 class Solution {
     public ListNode detectCycle(ListNode head) {
-        ListNode pos = head;
-        Set<ListNode> set = new HashSet<>();
-        while (pos != null) {
-            if (set.contains(pos)) {
-                return pos;
-            } else {
-                set.add(pos);
+        // 1 hash
+        // ListNode pos = head;
+        // Set<ListNode> set = new HashSet<>();
+        // while (pos != null) {
+        //     if (set.contains(pos)) {
+        //         return pos;
+        //     } else {
+        //         set.add(pos);
+        //     }
+        //     pos = pos.next;
+        // }
+        // return null;
+        
+        // 2 point
+        ListNode slow = head, fast = head;
+        while (true) {
+            if (fast == null || fast.next == null) return null;
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                fast = head;
+                break;
             }
-            pos = pos.next;
         }
-        return null;
+
+        while (slow != fast) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        return fast;
     }
 }
 // @lc code=end
