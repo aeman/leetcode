@@ -1,5 +1,3 @@
-import java.util.jar.Manifest;
-
 /*
  * @lc app=leetcode.cn id=337 lang=java
  *

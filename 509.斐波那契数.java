@@ -29,7 +29,5 @@ class Solution {
         memo[n] = helper(n - 1, memo) + helper(n - 2, memo);
         return memo[n];
     }
-
-    
 }
 // @lc code=end
