@@ -7,25 +7,22 @@
 // @lc code=start
 class Solution {
     public void sortColors(int[] nums) {
-        int n = nums.length;
+        int left = 0, right = nums.length - 1;
         int pos = 0;
 
-        for (int i = 0; i < n; i++) {
-            if (nums[i] == 0) {
-                int temp = nums[pos];
-                nums[pos] = nums[i];
-                nums[i] = temp;
-                pos++;
+        while (pos <= right) {
+            if (nums[pos] == 0) {
+                nums[pos] = nums[left];
+                nums[left] = 0;
+                left++;
             }
-        }
-
-        for (int i = 0; i < n; i++) {
-            if (nums[i] == 1) {
-                int temp = nums[pos];
-                nums[pos] = nums[i];
-                nums[i] = temp;
-                pos++;
+            if (nums[pos] == 2) {
+                nums[pos] = nums[right];
+                nums[right] = 2;
+                right--;
+                pos--;
             }
+            pos++;
         }
     }
 }
