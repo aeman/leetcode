@@ -29,9 +29,9 @@ class Solution {
             if (midValue == target) {
                 return true;
             } else if (midValue > target) {
-                high = high - 1;
+                high = mid - 1;
             } else {
-                low = low + 1;
+                low = mid + 1;
             }
         }
         return false;

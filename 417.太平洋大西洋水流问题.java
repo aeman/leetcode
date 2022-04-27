@@ -18,15 +18,18 @@ class Solution {
         boolean[][] pacific =  new boolean[m][n];
         boolean[][] atlantic =  new boolean[m][n];
 
+        // 上下两边
         for (int i = 0; i < m; i++) {
             dfs(i, 0, pacific, heights);
             dfs(i, n - 1, atlantic, heights);
         }
+        // 左右两边
         for (int i = 0; i < n; i++) {
             dfs(0, i,  pacific, heights);
             dfs(m - 1, i, atlantic,  heights);
         }
 
+        // 找到同时到达两个大洋的交集
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (pacific[i][j] && atlantic[i][j]) {
