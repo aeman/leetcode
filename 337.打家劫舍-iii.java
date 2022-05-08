@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  * @lc app=leetcode.cn id=337 lang=java
  *
@@ -21,9 +24,27 @@
  * }
  */
 class Solution {
+    // private Map<TreeNode, Integer> map = new HashMap<>();
+    
     public int rob(TreeNode root) {
+        // if (root == null) return 0;
+        // if (map.containsKey(root)) return map.get(root);
+
+        // int money = root.val;
+
+        // if (root.left != null) {
+        //     money += rob(root.left.left) + rob(root.left.right);
+        // }
+        // if (root.right != null) {
+        //     money += rob(root.right.left) + rob(root.right.right);
+        // }
+
+        // int max = Math.max(money, rob(root.left) + rob(root.right));
+        // map.put(root, max);
+        // return max;
+
         int[] dp = dfs(root);
-        return Math.max(dp[0], dp[1]);
+        return Math.max(dp[0], dp[1]);  // 0表示不抢，1表示抢
     }
 
     private int[] dfs(TreeNode root) {
@@ -32,10 +53,10 @@ class Solution {
         int[] left = dfs(root.left);
         int[] right = dfs(root.right);
 
-        int rob = root.val + left[1] + right[1];
         int notRob = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+        int rob = root.val + left[0] + right[0];
 
-        return new int[]{rob, notRob};
+        return new int[]{notRob, rob};
     }
 }
 // @lc code=end
