@@ -6,52 +6,43 @@
 
 // @lc code=start
 class Solution {
+    private int[][] dirs = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+    private int m, n;
+
     public int numEnclaves(int[][] grid) {
         int numIslands = 0;
-        int nr = grid.length;
-        int nc = grid[0].length;
+        this.m = grid.length;
+        this.n = grid[0].length;
 
-        for (int i = 0; i < nr; i++) {
-            if (grid[i][0] == 1) {
-                dfs(grid, i, 0, nr, nc);
-            }
-            if (grid[i][nc - 1] == 1) {
-                dfs(grid, i, nc - 1, nr, nc);
-            }
+        for (int i = 0; i < m; i++) {
+            if (grid[i][0] == 1) dfs(grid, i, 0);
+            if (grid[i][n - 1] == 1) dfs(grid, i, n - 1);
         }
 
-        for (int i = 0; i < nc; i++) {
-            if (grid[0][i] == 1) {
-                dfs(grid, 0, i, nr, nc);
-            }
-            if (grid[nr - 1][i] == 1) {
-                dfs(grid, nr - 1, i, nr, nc);
-            }
+        for (int i = 0; i < n; i++) {
+            if (grid[0][i] == 1) dfs(grid, 0, i);
+            if (grid[m - 1][i] == 1) dfs(grid, m - 1, i);
         }
 
-        for (int i = 0; i < nr; i++) {
-            for (int j = 0; j < nc; j++) {
-                if (grid[i][j] == 1) {
-                    numIslands++;
-                }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) numIslands++;
             }
         }
 
         return numIslands;
     }
 
-    public void dfs(int[][] grid, int r, int c, int nr, int nc) {
-        grid[r][c] = 0;
+    public void dfs(int[][] grid, int row, int col) {
+        // 陆地沉入海底
+        grid[row][col] = 0;
 
-        if (r - 1 >= 0 && grid[r - 1][c] == 1)
-            dfs(grid, r - 1, c, nr, nc);
-        if (r + 1 < nr && grid[r + 1][c] == 1)
-            dfs(grid, r + 1, c, nr, nc);
-        if (c - 1 >= 0 && grid[r][c - 1] == 1)
-            dfs(grid, r, c - 1, nr, nc);
-        if (c + 1 < nc && grid[r][c + 1] == 1)
-            dfs(grid, r, c + 1, nr, nc);
+        for (int[] dir : dirs) {
+            int row2 = row + dir[0], col2 = col + dir[1];
+            // 超出边界或者不是陆地，跳过
+            if (row2 < 0 || row2 > m - 1 || col2 < 0 || col2 > n - 1 || grid[row2][col2] != 1) continue;
+            dfs(grid, row2, col2);
+        }
     }
 }
 // @lc code=end
-
