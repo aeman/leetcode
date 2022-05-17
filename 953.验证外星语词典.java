@@ -1,0 +1,33 @@
+/*
+ * @lc app=leetcode.cn id=953 lang=java
+ *
+ * [953] 验证外星语词典
+ */
+
+// @lc code=start
+class Solution {
+    public boolean isAlienSorted(String[] words, String order) {
+        int[] index = new int[26];
+        for (int i = 0; i < order.length(); i++) {
+            index[order.charAt(i) - 'a'] = i;
+        }
+
+        for (int i = 1; i < words.length; i++) {
+            for (int j = 0; j < words[i].length() && j < words[i - 1].length(); j++) {
+                int pre = index[words[i - 1].charAt(j) - 'a'];
+                int cur = index[words[i].charAt(j) - 'a'];
+                if (pre < cur) {
+                    break;
+                } else if (pre > cur) {
+                    return false;
+                }
+            }
+            // words = ["apple","app"]
+            if (words[i - 1].length() > words[i].length() && words[i - 1].indexOf(words[i]) != -1)
+                return false;
+        }
+
+        return true;
+    }
+}
+// @lc code=end
