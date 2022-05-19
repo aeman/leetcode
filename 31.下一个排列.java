@@ -8,29 +8,29 @@
 class Solution {
     public void nextPermutation(int[] nums) {
         if (nums == null || nums.length == 1) return;
-        int pos = -1, pos2 = -1;
+        int left = -1, right = -1;
 
         for (int i = nums.length - 2; i >= 0; i--) {
             if (nums[i] < nums[i + 1]) {
-                pos = i;
+                left = i;
                 break;
             }
         }
 
         // 倒序数组，直接反转
-        if (pos == -1) {
+        if (left == -1) {
             reverse(nums, 0, nums.length - 1);
             return;
         }
 
         for (int i = nums.length - 1; i >= 0; i--) {
-            if (nums[i] > nums[pos]) {
-                pos2 = i;
+            if (nums[i] > nums[left]) {
+                right = i;
                 break;
             }
         }
-        swap(nums, pos, pos2);
-        reverse(nums, pos + 1, nums.length - 1);
+        swap(nums, left, right);
+        reverse(nums, left + 1, nums.length - 1);
     }
 
     public void reverse(int[] nums, int i, int j) {
