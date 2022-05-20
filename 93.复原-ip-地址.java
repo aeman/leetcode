@@ -25,16 +25,16 @@ class Solution {
             return;
         }
 
-        for (int i = 1; i <= 3 && (index + i) <= s.length(); i++) {
-            int val = Integer.parseInt(s.substring(index, index + i));
-            if (val > 255 || (i >= 2 && s.charAt(index) == '0'))
+        // ip段长度在1-3之间
+        for (int len = 1; len <= 3 && (index + len) <= s.length(); len++) {
+            int val = Integer.parseInt(s.substring(index, index + len));
+            // ip段大于255或者以0开头，不符合规则退出
+            if (val > 255 || (len >= 2 && s.charAt(index) == '0'))
                 break;
 
             path[segment] = val;
-            backtrack(s, index + i, segment + 1);
-            // path[segment] = -1;
+            backtrack(s, index + len, segment + 1);
         }
-
     }
 }
 // @lc code=end
