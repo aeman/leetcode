@@ -9,24 +9,26 @@ import java.util.List;
 
 // @lc code=start
 class Solution {
+    private List<List<Integer>> ans = new ArrayList<>();
+    private List<Integer> subset = new ArrayList<>();
+
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> list = new ArrayList<>();
-        backtrack(list, new ArrayList<>(), nums);
-        return list;
+        backtrack(nums);
+        return ans;
     }
 
-    private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums) {
-        if (tempList.size() == nums.length) {
-            list.add(new ArrayList<>(tempList));
+    private void backtrack(int[] nums) {
+        if (subset.size() == nums.length) {
+            ans.add(new ArrayList<>(subset));
             return;
         }
 
         for (int i = 0; i < nums.length; i++) {
-            if (tempList.contains(nums[i])) continue;
+            if (subset.contains(nums[i])) continue;
 
-            tempList.add(nums[i]);
-            backtrack(list, tempList, nums);
-            tempList.remove(tempList.size() - 1);
+            subset.add(nums[i]);
+            backtrack(nums);
+            subset.remove(subset.size() - 1);
         }
     }
 }

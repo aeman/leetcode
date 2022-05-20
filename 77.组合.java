@@ -9,23 +9,29 @@ import java.util.List;
 
 // @lc code=start
 class Solution {
+    private List<List<Integer>> ans = new ArrayList<>();
+    private List<Integer> subset = new ArrayList<Integer>();
+
     public List<List<Integer>> combine(int n, int k) {
-        List<List<Integer>> list = new ArrayList<>();
-        backtrack(list, new ArrayList<Integer>(), 1, n, k);
-        return list;
+        backtrack(1, n, k);
+        return ans;
     }
 
-    private void backtrack(List<List<Integer>> list, List<Integer> tempList, int depth, int n, int k) {
-        if (k == 0) {
-            list.add(new ArrayList<>(tempList));
+    private void backtrack(int index, int n, int k) {
+        // 剪枝：subset 长度加上区间 [index, n] 的长度小于 k，不可能构造出长度为 k 的 subset
+        if (subset.size() + (n - index + 1) < k) {
             return;
         }
-
-        for (int i = depth; i <= n; i++) {
-            tempList.add(i);
-            backtrack(list, tempList, i + 1, n, k - 1);
-            tempList.remove(tempList.size() - 1);
+        if (subset.size() == k) {
+            ans.add(new ArrayList<>(subset));
+            return;
         }
+        // if (index > n) return;
+        
+        backtrack(index + 1, n, k);
+        subset.add(index);
+        backtrack(index + 1, n, k);
+        subset.remove(subset.size() - 1);
     }
 }
 // @lc code=end

@@ -9,19 +9,23 @@ import java.util.List;
 
 // @lc code=start
 class Solution {
+    private List<List<Integer>> ans = new ArrayList<>();
+    private List<Integer> subset = new ArrayList<>();
+
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<>();
-        backtrack(ans, new ArrayList<>(), 0, nums);
+        backtrack(0, nums);
         return ans;
     }
 
-    public void backtrack(List<List<Integer>> ans, List<Integer> list, int pos, int[] nums) {
-        ans.add(new ArrayList<>(list));
-        for (int i = pos; i < nums.length; i++) {
-            list.add(nums[i]);
-            backtrack(ans, list, i + 1, nums);
-            list.remove(list.size() - 1);
+    public void backtrack(int index, int[] nums) {
+        if (index == nums.length) {
+            ans.add(new ArrayList<>(subset));
+            return;
         }
+        backtrack(index + 1, nums);
+        subset.add(nums[index]);
+        backtrack(index + 1, nums);
+        subset.remove(subset.size() - 1);
     }
 }
 // @lc code=end
