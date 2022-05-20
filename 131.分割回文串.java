@@ -9,24 +9,25 @@ import java.util.List;
 
 // @lc code=start
 class Solution {
+    private List<List<String>> ans = new ArrayList<>();
+    private List<String> sublist = new ArrayList<>();
+
     public List<List<String>> partition(String s) {
-        List<List<String>> list = new ArrayList<>();
-        List<String> path = new ArrayList<>();
-        backtrack(0, s, path, list);
-        return list;
+        backtrack(0, s);
+        return ans;
     }
 
-    private void backtrack(int idx, String s, List<String> path, List<List<String>> list) {
-        if (idx == s.length()) {
-            list.add(new ArrayList<>(path));
+    private void backtrack(int index, String s) {
+        if (index == s.length()) {
+            ans.add(new ArrayList<>(sublist));
             return;
         }
 
-        for (int i = idx; i < s.length(); i++) {
-            if (isPalindrome(s, idx, i)) {
-                path.add(s.substring(idx, i + 1));
-                backtrack(i + 1, s, path, list);
-                path.remove(path.size() - 1);
+        for (int j = index; j < s.length(); j++) {
+            if (isPalindrome(s, index, j)) {
+                sublist.add(s.substring(index, j + 1));
+                backtrack(j + 1, s);
+                sublist.remove(sublist.size() - 1);
             }
         }
     }
