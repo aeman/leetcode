@@ -12,6 +12,7 @@ class Solution {
         int n = nums.length, sum = Arrays.stream(nums).sum(), max = Arrays.stream(nums).max().getAsInt();
         if (sum % 2 != 0 || n < 2) return false;
         int target = sum / 2;
+        //如果 maxNum>target，则除了 maxNum 以外的所有元素之和一定小于 target，因此不可能将数组分割成元素和相等的两个子集
         if (max > target) return false;
 
         boolean[][] dp = new boolean[n][target + 1];
