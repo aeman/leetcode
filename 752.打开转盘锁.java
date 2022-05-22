@@ -1,6 +1,7 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
@@ -14,59 +15,52 @@ import java.util.Set;
 // @lc code=start
 class Solution {
     public int openLock(String[] deadends, String target) {
-        if (target.equals("0000")) return 0;
-        
-        Set<String> dead = new HashSet<>();
-        for (String s : deadends) {
-            dead.add(s);
-        }
-        if (dead.contains("0000")) return -1;
+        String init = "0000";
+        Set<String> dead = new HashSet<>(Arrays.asList(deadends));
+        if (dead.contains(init) || dead.contains(target)) return -1;
 
         Set<String> visited = new HashSet<>();
-        visited.add("0000");
+        visited.add(init);
 
         int step = 0;
-        Queue<String> queue = new LinkedList<>();
-        queue.offer("0000");
-        while (!queue.isEmpty()) {
-            step++;
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                String status = queue.poll();
-                for (String next : getStatus(status)) {
-                    if (!dead.contains(next) && !visited.contains(next)) {
-                        if (next.equals(target))
-                            return step;
-                        visited.add(next);
-                        queue.offer(next);
-                    }
+        Queue<String> queue1 = new ArrayDeque<>();
+        Queue<String> queue2 = new ArrayDeque<>();
+        queue1.offer(init);
+
+        while (!queue1.isEmpty()) {
+            String cur = queue1.poll();
+            if (cur.equals(target)) return step;
+
+            for (String next : getStatus(cur)) {
+                if (!dead.contains(next) && !visited.contains(next)) {
+                    visited.add(next);
+                    queue2.offer(next);
                 }
+            }
+
+            if (queue1.isEmpty()) {
+                step++;
+                queue1 = queue2;
+                queue2 = new ArrayDeque<>();
             }
         }
 
         return -1;
     }
 
+    //获取全部下一个状态
     private List<String> getStatus(String status) {
         List<String> nexts = new ArrayList<>();
         char[] cs = status.toCharArray();
         for (int i = 0; i < cs.length; i++) {
             char c = cs[i];
-            cs[i] = left(c);
+            cs[i] = c == '9' ? '0' : (char) (c + 1);    //左扭一下
             nexts.add(new String(cs));
-            cs[i] = right(c);
+            cs[i] = c == '0' ? '9' : (char) (c - 1);   //右扭一下
             nexts.add(new String(cs));
-            cs[i] = c;
+            cs[i] = c;          //恢复原状态
         }
         return nexts;
-    }
-
-    private char right(char c) {
-        return c == '0' ? '9' : (char) (c - 1);
-    }
-
-    private char left(char c) {
-        return c == '9' ? '0' : (char) (c + 1);
     }
 }
 // @lc code=end
