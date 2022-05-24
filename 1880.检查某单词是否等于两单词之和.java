@@ -7,8 +7,16 @@
 // @lc code=start
 class Solution {
     public boolean isSumEqual(String firstWord, String secondWord, String targetWord) {
+        int a = parse(firstWord), b = parse(secondWord), c = parse(targetWord);
+        return a + b == c ? true : false;
+    }
 
+    private int parse(String word) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : word.toCharArray()) {
+            sb.append(c - 'a');
+        }
+        return Integer.parseInt(sb.toString());
     }
 }
 // @lc code=end
-
