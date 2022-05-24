@@ -31,7 +31,7 @@ class Solution {
         return ans;
     }
 
-    private Solution.TrieNode buildTrie(int[] nums) {
+    private TrieNode buildTrie(int[] nums) {
         TrieNode root = new TrieNode();
         for (int num : nums) {
             TrieNode node = root;
