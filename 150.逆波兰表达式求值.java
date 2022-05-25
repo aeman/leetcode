@@ -10,31 +10,32 @@ import java.util.Deque;
 // @lc code=start
 class Solution {
     public int evalRPN(String[] tokens) {
-        int x, y;
         Deque<Integer> stack = new ArrayDeque<>();
-        
+
         for (String token : tokens) {
-            if (token.equals("+")) {
-                x = stack.pop();
-                y = stack.pop();
-                stack.push(x + y);
-            } else if (token.equals("-")) {
-                x = stack.pop();
-                y = stack.pop();
-                stack.push(y - x);
-            } else if (token.equals("*")) {
-                x = stack.pop();
-                y = stack.pop();
-                stack.push(x * y);
-            } else if (token.equals("/")) {
-                x = stack.pop();
-                y = stack.pop();
-                stack.push(y / x);
-            } else {
+            if (!token.equals("+") && !token.equals("-") 
+                && !token.equals("*") && !token.equals("/")) {
                 stack.push(Integer.parseInt(token));
+            } else {
+                stack.push(calc(stack.pop(), stack.pop(), token));
             }
         }
         return stack.pop();
+    }
+
+    private int calc(int x, int y, String token) {
+        switch (token) {
+            case "+":
+                return x + y;
+            case "-":
+                return y - x;
+            case "*":
+                return x * y;
+            case "/":
+                return y / x;
+            default:
+                return 1;
+        }
     }
 }
 // @lc code=end
