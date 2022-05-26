@@ -1,12 +1,12 @@
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
+import java.util.Queue;
 
 /*
- * @lc app=leetcode.cn id=199 lang=java
+ * @lc app=leetcode.cn id=515 lang=java
  *
- * [199] 二叉树的右视图
+ * [515] 在每个树行中找最大值
  */
 
 // @lc code=start
@@ -26,33 +26,22 @@ import java.util.List;
  * }
  */
 class Solution {
-    public List<Integer> rightSideView(TreeNode root) {
+    public List<Integer> largestValues(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
-        bfs(root, ans);
-        // dfs(root, ans, 0);
-        return ans;
-    }
-
-    private void bfs(TreeNode root, List<Integer> ans) {
-        Deque<TreeNode> queue = new ArrayDeque<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
         if (root != null) queue.offer(root);
+
         while (!queue.isEmpty()) {
-            int size = queue.size();
-            ans.add(queue.peekLast().val);
+            int size = queue.size(), max = Integer.MIN_VALUE;
             for (int i = 0; i < size; i++) {
                 TreeNode node = queue.poll();
                 if (node.left != null) queue.offer(node.left);
                 if (node.right != null) queue.offer(node.right);
+                max = Math.max(max, node.val);
             }
+            ans.add(max);
         }
-    }
-
-    private void dfs(TreeNode root, List<Integer> ans, int level) {
-        if (root == null) return;
-        if (ans.size() == level) ans.add(root.val);
-
-        dfs(root.right, ans, level + 1);
-        dfs(root.left, ans, level + 1);
+        return ans;
     }
 }
 // @lc code=end
