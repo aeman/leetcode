@@ -30,6 +30,7 @@ class Solution {
             cur.next = temp.next;
             temp.next = pre.next;
             pre.next = temp;
+            
             temp = cur.next;
         }
 

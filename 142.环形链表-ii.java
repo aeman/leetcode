@@ -40,12 +40,15 @@ class Solution {
             if (fast == null || fast.next == null) return null;
             slow = slow.next;
             fast = fast.next.next;
+
+            // 如果快慢指针相遇，设置其中一个节点指向head，跳出循环
             if (slow == fast) {
-                fast = head;
+                slow = head;
                 break;
             }
         }
 
+        // 如果再次相遇，正好为入口节点
         while (slow != fast) {
             slow = slow.next;
             fast = fast.next;

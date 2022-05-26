@@ -20,7 +20,7 @@ class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         ListNode a = headA, b = headB;
 
-        // ab节点head互换，如果有相交节点则返回；如果没有，则同时到达null
+        // 把相交链表改造成环形链表，找到环形的入口点
         while (a != b) {
             if (a == null) {
                 a = headB;

@@ -18,6 +18,7 @@
  */
 class Solution {
     public boolean hasCycle(ListNode head) {
+        // 1 hash
         // Set<ListNode> set = new HashSet<>();
         // while (head != null) {
         //     if (!set.add(head)) {
@@ -28,6 +29,7 @@ class Solution {
 
         // return false;
 
+        // 2 point
         if (head == null) return false;
         
         ListNode fast = head, slow = head;

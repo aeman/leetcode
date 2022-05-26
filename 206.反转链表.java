@@ -1,3 +1,8 @@
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.Queue;
+
 /*
  * @lc app=leetcode.cn id=206 lang=java
  *
@@ -17,6 +22,7 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
+        // 1.迭代
         // ListNode pre = null;
         // ListNode cur = head;
         // ListNode temp;
@@ -29,6 +35,22 @@ class Solution {
         // }
         // return pre;
 
+        // 2.队列
+        // Deque<ListNode> queue  = new ArrayDeque<>();
+        // while (head != null) {
+        //     queue.offer(head);
+        //     head = head.next;
+        // }
+        // ListNode dummy = new ListNode(), newHead = dummy;
+        // while (!queue.isEmpty()) {
+        //     ListNode node = queue.pollLast();
+        //     node.next = null;
+        //     newHead.next = node;
+        //     newHead = newHead.next;
+        // }
+        // return dummy.next;
+
+        // 3.递归
         return recursiveNode(head, null);
     }
 
