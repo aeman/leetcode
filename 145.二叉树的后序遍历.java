@@ -1,4 +1,6 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 /*
@@ -26,7 +28,28 @@ import java.util.List;
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
-        postorder(root, ans);
+
+        // 1.bfs
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode prev = null;
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if (root.right == null || root.right == prev) {
+                ans.add(root.val);
+                prev = root;
+                root = null;
+            } else {
+                stack.push(root);
+                root = root.right;
+            }
+        }
+
+        // 2.dfs
+        // postorder(root, ans);
         return ans;
     }
 

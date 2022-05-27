@@ -1,4 +1,6 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 /*
@@ -26,7 +28,21 @@ import java.util.List;
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
-        inorder(root, ans);
+
+        // 1.bfs
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            ans.add(root.val);
+            root = root.right;
+        }
+
+        // 2.dfs
+        // inorder(root, ans);
         return ans;
     }
 

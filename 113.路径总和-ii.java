@@ -24,13 +24,14 @@ import java.util.List;
  * }
  */
 class Solution {
+    private List<List<Integer>> ans = new ArrayList<>();
+
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        List<List<Integer>> ans = new ArrayList<>();
-        dfs(root, targetSum, new ArrayList<Integer>(), ans);
+        backtrack(root, targetSum, new ArrayList<Integer>());
         return ans;   
     }
 
-    private void dfs(TreeNode root, int sum, List<Integer> path, List<List<Integer>> ans) {
+    private void backtrack(TreeNode root, int sum, List<Integer> path) {
         if (root == null) return;
 
         path.add(root.val);
@@ -38,8 +39,8 @@ class Solution {
         if (root.left == null && root.right == null && sum == root.val) {
             ans.add(new ArrayList<>(path));
         } else {
-            dfs(root.left, sum - root.val, path, ans);
-            dfs(root.right, sum - root.val, path, ans);
+            backtrack(root.left, sum - root.val, path);
+            backtrack(root.right, sum - root.val, path);
         }
 
         path.remove(path.size() - 1);

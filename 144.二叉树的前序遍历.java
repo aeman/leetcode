@@ -1,4 +1,6 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 /*
@@ -26,17 +28,31 @@ import java.util.List;
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
-        preorder(root, ans);
+
+        // 1.bfs
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
+                ans.add(root.val);
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            root = root.right;
+        }
+
+        // 2.dfs
+        // preorder(root, ans);
         return ans;
     }
 
     private void preorder(TreeNode root, List<Integer> ans) {
-        if (root == null) return;
-        
+        if (root == null)
+            return;
+
         ans.add(root.val);
         preorder(root.left, ans);
         preorder(root.right, ans);
     }
 }
 // @lc code=end
-

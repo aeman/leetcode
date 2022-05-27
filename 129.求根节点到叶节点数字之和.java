@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=112 lang=java
+ * @lc app=leetcode.cn id=129 lang=java
  *
- * [112] 路径总和
+ * [129] 求根节点到叶节点数字之和
  */
 
 // @lc code=start
@@ -21,10 +21,17 @@
  * }
  */
 class Solution {
-    public boolean hasPathSum(TreeNode root, int targetSum) {
-        if (root == null) return false;
-        if (root.left == null && root.right == null && root.val == targetSum) return true;
-        return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
+    public int sumNumbers(TreeNode root) {
+        return dfs(root, 0);
+    }
+
+    private int dfs(TreeNode root, int path) {
+        if (root == null) return 0;
+
+        path = path * 10 + root.val;
+        if (root.left == null && root.right == null) return  path;
+
+        return dfs(root.left, path)  + dfs(root.right, path);
     }
 }
 // @lc code=end
