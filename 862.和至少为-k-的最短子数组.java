@@ -14,7 +14,7 @@ class Solution {
             while (left <= right && sum >= k) {
                 minLen = Math.min(minLen, right - left + 1);
                 sum -= nums[left++];
-                // left++;
+                left++;
             }
         }
 

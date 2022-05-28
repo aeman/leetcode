@@ -10,17 +10,22 @@ class Solution {
         int n = s.length(), ans = 0;
 
         for (int i = 0; i < n; i++) {
-            int j = i - 1, k = i;
-            while (k < n - 1 && s.charAt(k) == s.charAt(k + 1))
-                k++;
-
-            ans += (k - j) * (k - j + 1) / 2;
-            i = k++;
-            while (j >= 0 && k < n && s.charAt(k++) == s.charAt(j--))
-                ans++;
+            ans += count(s, i, i);
+            ans += count(s, i, i + 1);
         }
 
         return ans;
+    }
+
+    // 从中心向两边扩展
+    private int count(String s, int left, int right) {
+        int ret = 0;
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            ret++;
+            left--;
+            right++;
+        }
+        return ret;
     }
 }
 // @lc code=end

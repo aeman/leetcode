@@ -11,7 +11,8 @@ import java.util.List;
 // @lc code=start
 class Solution {
     public List<Integer> findAnagrams(String s, String p) {
-        if (s.length() < p.length()) return new ArrayList<>();
+        int n = p.length();     // 异位词长度
+        if (s.length() < n) return new ArrayList<>();
         
         List<Integer> list = new ArrayList<>();
         int[] sArr = new int[26], pArr = new int[26];
@@ -20,16 +21,16 @@ class Solution {
             pArr[c - 'a']++;
         }
 
-        for (int i = 0; i < p.length(); i++) {
+        for (int i = 0; i < n; i++) {
             sArr[s.charAt(i) - 'a']++;
         }
         if (Arrays.equals(sArr, pArr)) list.add(0);
 
-        for (int i = p.length(); i < s.length(); i++) {
+        for (int i = n; i < s.length(); i++) {
             sArr[s.charAt(i - p.length()) - 'a']--;
             sArr[s.charAt(i) - 'a']++;
             if (Arrays.equals(sArr, pArr)) {
-                list.add(i - p.length() + 1);
+                list.add(i - n + 1);
             }
         }
 
