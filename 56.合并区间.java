@@ -25,6 +25,7 @@ class Solution {
                 end = intervals[i][1];
             }
         }
+        // 最后一个区间的处理
         ans[index][0] = start;
         ans[index][1] = end;
 

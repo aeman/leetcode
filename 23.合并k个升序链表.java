@@ -20,50 +20,54 @@ import java.util.Queue;
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        // ListNode ans = null;
-        // for (int i = 0; i < lists.length; i++) {
-        //     ans = mergeTwoList(ans, lists[i]);
-        // }
-        // return ans;
         if (lists == null || lists.length == 0) return null;
-        Queue<ListNode> queue = new PriorityQueue<>(lists.length, (o1, o2) -> o1.val - o2.val);
 
-        ListNode dummy = new ListNode(0), cur = dummy;
-        for (ListNode node : lists) {
-            if (node != null) queue.offer(node);
-        }
+        // 1.归并排序
+        return mergeLists(lists, 0, lists.length);
+
+        // 2.小顶堆
+        // Queue<ListNode> queue = new PriorityQueue<>(lists.length, (o1, o2) -> o1.val - o2.val);
+
+        // ListNode dummy = new ListNode(0), cur = dummy;
+        // for (ListNode node : lists) {
+        //     if (node != null) queue.offer(node);
+        // }
         
-        while (!queue.isEmpty()) {
-            ListNode node = queue.poll();
-            cur.next = node;
-            if (node.next != null) queue.offer(node.next);
+        // while (!queue.isEmpty()) {
+        //     ListNode node = queue.poll();
+        //     cur.next = node;
+        //     if (node.next != null) queue.offer(node.next);
 
-            cur = cur.next;
-        }
-        return dummy.next;
+        //     cur = cur.next;
+        // }
+        // return dummy.next;
     }
 
-    // public ListNode mergeTwoList(ListNode a, ListNode b) {
-    //     if (a == null || b == null) {
-    //         return a == null ? b : a;
-    //     }
-    //     ListNode head = new ListNode(0);
-    //     ListNode tail = head, aPtr = a, bPtr = b;
-    //     while (aPtr != null && bPtr != null) {
-    //         if (aPtr.val <= bPtr.val) {
-    //             tail.next = aPtr;
-    //             aPtr = aPtr.next;
-    //         } else {
-    //             tail.next = bPtr;
-    //             bPtr = bPtr.next;
-    //         }
-    //         tail = tail.next;
-    //     }
-    //     if (aPtr == null || bPtr == null) {
-    //         tail.next = (aPtr == null ? b.next : a.next);
-    //     }
-    //     return head.next;
-    // }
+    private ListNode mergeLists(ListNode[] lists, int start, int end) {
+        if (start + 1 == end) return lists[start];
+        
+        int mid = (start + end) / 2;
+        ListNode head1 = mergeLists(lists, start, mid);
+        ListNode head2 = mergeLists(lists, mid, end);
+        return merge(head1, head2);
+    }
+
+    private ListNode merge(ListNode head1, ListNode head2) {
+        ListNode dummy = new ListNode(-1), cur = dummy;
+
+        while (head1 != null && head2 != null) {
+            if (head1.val < head2.val) {
+                cur.next = head1;
+                head1 = head1.next;
+            } else {
+                cur.next = head2;
+                head2  = head2.next;
+            }
+            cur = cur.next;
+        }
+        cur.next = head1 == null ? head2 : head1;
+        return dummy.next;
+    }
 }
 // @lc code=end
 

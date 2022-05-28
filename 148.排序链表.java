@@ -37,21 +37,21 @@ class Solution {
     }
 
     ListNode merge(ListNode node1, ListNode node2) {
-        ListNode dummy = new ListNode(0), temp = dummy;
+        ListNode dummy = new ListNode(0), cur = dummy;
 
         while (node1 != null && node2 != null) {
             if (node1.val < node2.val) {
-                temp.next = node1;
+                cur.next = node1;
                 node1 = node1.next;
             } else {
-                temp.next = node2;
+                cur.next = node2;
                 node2 = node2.next;
             }
-            temp = temp.next;
+            cur = cur.next;
         }
 
-        if (node1 != null) temp.next = node1;
-        if (node2 != null) temp.next = node2;
+        if (node1 != null) cur.next = node1;
+        if (node2 != null) cur.next = node2;
 
         return dummy.next;
     }
