@@ -34,6 +34,5 @@ class Solution {
             parent[x] = find(parent[x]);
         return parent[x];
     }
-
 }
 // @lc code=end
