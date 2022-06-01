@@ -1,6 +1,7 @@
-import java.awt.List;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Stack;
+import java.util.Deque;
+import java.util.List;
 
 /*
  * @lc app=leetcode.cn id=98 lang=java
@@ -26,6 +27,7 @@ import java.util.Stack;
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
+        // 1.中序遍历
         // List<Integer> list = new ArrayList<>();
         // inOrder(root, list);
         // for (int i = 0; i < list.size() - 1; i++) {
@@ -34,9 +36,10 @@ class Solution {
         // }
         // return true;
 
+        // 2.层序遍历
         // if (root == null)
         //     return true;
-        // Stack<TreeNode> stack = new Stack<>();
+        // Deque<TreeNode> stack = new ArrayDeque<>();
         // TreeNode pre = null;
         // while (root != null || !stack.isEmpty()) {
         //     while (root != null) {
@@ -51,6 +54,7 @@ class Solution {
         // }
         // return true;
 
+        // 3.递归
         return isValidBST(root, null, null);
     }
 
@@ -62,14 +66,12 @@ class Solution {
         return isValidBST(root.left, min, root) && isValidBST(root.right, root, max);
     }
 
-    // public void inOrder(TreeNode node, List list) {
-    //     if (node != null) {
-    //         inOrder(node.left, list);
-    //         list.add(node.val);
-    //         inOrder(node.right, list);
-    //     }
-    // }
-
-    
+    public void inOrder(TreeNode node, List<Integer> list) {
+        if (node != null) {
+            inOrder(node.left, list);
+            list.add(node.val);
+            inOrder(node.right, list);
+        }
+    }
 }
 // @lc code=end

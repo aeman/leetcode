@@ -2,9 +2,9 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /*
- * @lc app=leetcode.cn id=111 lang=java
+ * @lc app=leetcode.cn id=222 lang=java
  *
- * [111] 二叉树的最小深度
+ * [222] 完全二叉树的节点个数
  */
 
 // @lc code=start
@@ -24,41 +24,51 @@ import java.util.Deque;
  * }
  */
 class Solution {
-    public int minDepth(TreeNode root) {
-        return bfs(root);
+    public int countNodes(TreeNode root) {
+        // return bfs(root);
         // return dfs(root);
+
+        // 利用完全二叉树特点
+        if (root == null) return 0;
+        int left = countLevel(root.left);
+        int right = countLevel(root.right);
+        if (left == right) {
+            return countNodes(root.right) + (1 << left);
+        } else {
+            return countNodes(root.left) + (1 << right);
+        }
+    }
+
+    private int countLevel(TreeNode root) {
+        int level = 0;
+        while (root != null) {
+            level++;
+            root = root.left;
+        }
+        return level;
+    }
+
+    private int dfs(TreeNode root) {
+        if (root == null) return 0;
+        return dfs(root.left) + dfs(root.right) + 1;
     }
 
     private int bfs(TreeNode root) {
         if (root == null) return 0;
         Deque<TreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
-        int depth = 0;
 
+        int ans = 0;
         while (!queue.isEmpty()) {
             int size = queue.size();
+            ans += size;
             for (int i = 0; i < size; i++) {
                 TreeNode node = queue.poll();
-                // 到达第一个叶子节点，找到最小深度
-                if (node.left == null && node.right == null) return ++depth;
                 if (node.left != null) queue.offer(node.left);
                 if (node.right != null) queue.offer(node.right);
             }
-            depth++;
         }
-
-        return depth;
-    }
-
-    private int dfs(TreeNode root) {
-        if (root == null) return 0;
-
-        int left = dfs(root.left);
-        int right = dfs(root.right);
-        if (root.left == null) return right + 1;
-        if (root.right == null) return left + 1;
-
-        return Math.min(left, right) + 1;
+        return ans;
     }
 }
 // @lc code=end

@@ -1,3 +1,6 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /*
  * @lc app=leetcode.cn id=104 lang=java
  *
@@ -22,11 +25,36 @@
  */
 class Solution {
     public int maxDepth(TreeNode root) {
-        if (root == null) return 0;
-        int lh = maxDepth(root.left);
-        int rh = maxDepth(root.right);
+        return bfs(root);
+        // return dfs(root);
+    }
 
-        return Math.max(lh, rh)  + 1;
+    private int bfs(TreeNode root) {
+        if (root == null) return 0;
+        Deque<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+        int depth = 0;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+            }
+            depth++;
+        }
+
+        return depth;
+    }
+
+    private int dfs(TreeNode root) {
+        if (root == null) return 0;
+        int left = dfs(root.left);
+        int right = dfs(root.right);
+
+        return Math.max(left, right)  + 1;
     }
 }
 // @lc code=end

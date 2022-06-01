@@ -1,4 +1,3 @@
-import javax.swing.tree.TreeNode;
 
 /*
  * @lc app=leetcode.cn id=108 lang=java
@@ -31,14 +30,12 @@ class Solution {
         if (left > right) return null;
 
         int mid = (right + left) / 2;
-        TreeNode
-         node = new TreeNode(nums[mid]);
+        TreeNode node = new TreeNode(nums[mid]);
         node.left = helper(nums, left, mid  - 1);
         node.right = helper(nums, mid + 1, right);
 
         return node;
     }
-
 }
 // @lc code=end
 
