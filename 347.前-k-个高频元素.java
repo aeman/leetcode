@@ -17,17 +17,11 @@ class Solution {
             map.put(i, map.getOrDefault(i, 0) + 1);
         }
 
-        Queue<int[]> queue = new PriorityQueue<>((a, b) -> b[1]- a[1]);
+        Queue<int[]> queue = new PriorityQueue<>((a, b) -> a[1]- b[1]);
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             int num = entry.getKey(), count = entry.getValue();
-            if (queue.size() == k) {
-                if (queue.peek()[1] < count) {
-                    queue.poll();
-                    queue.offer(new int[]{num, count});
-                }
-            } else {
-                queue.offer(new int[]{num, count});
-            }
+            queue.offer(new int[]{num, count});
+            if (queue.size() > k) queue.poll();
         }
 
         return queue.stream().mapToInt(x -> x[0]).toArray();
