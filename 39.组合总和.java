@@ -10,26 +10,30 @@ import java.util.List;
 
 // @lc code=start
 class Solution {
+    private List<List<Integer>> ans = new ArrayList<>();
+    private List<Integer> list = new ArrayList<>();
+
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> list = new ArrayList<>();
         Arrays.sort(candidates);
-        backtrack(list, new ArrayList<>(), candidates, target, 0);
-        return list;
+        backtrack(candidates, 0, 0, target);
+        return ans;
     }
 
-    private void backtrack(List<List<Integer>> list, List<Integer> arrayList, int[] candidates, int target, int idx) {
-        if (target < 0) {
+    private void backtrack(int[] candidates, int index, int sum, int targetSum) {
+        if (sum == targetSum) {
+            ans.add(new ArrayList<>(list));
             return;
-        } else if (target == 0) {
-            list.add(new ArrayList<>(arrayList));
-        } else {
-            for (int i = idx; i < candidates.length; i++) {
-                arrayList.add(candidates[i]);
-                backtrack(list, arrayList, candidates, target - candidates[i], i);
-                arrayList.remove(arrayList.size() - 1);
-            }
+        }
+
+        for (int i = index; i < candidates.length; i++) {
+            if (sum + candidates[i] > targetSum) break; // 剪枝
+
+            list.add(candidates[i]);
+            sum += candidates[i];
+            backtrack(candidates, i, sum, targetSum);   // 可以重复，不用i+1
+            list.remove(list.size() - 1);
+            sum -= candidates[i];
         }
     }
 }
 // @lc code=end
-

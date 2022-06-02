@@ -10,28 +10,31 @@ import java.util.List;
 
 // @lc code=start
 class Solution {
-    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        List<List<Integer>> list = new ArrayList<>();
-        Arrays.sort(candidates);
-        backtrack(list, new ArrayList<>(), candidates, target, 0);
-        return list;
+    private List<List<Integer>> ans = new ArrayList<>();
+    private List<Integer> list = new ArrayList<>();
+
+    public List<List<Integer>> combinationSum2(int[] candidates, int targetSum) {
+        Arrays.sort(candidates); // 为去重做准备
+        backtrack(candidates, 0, 0, targetSum);
+        return ans;
     }
 
-    private void backtrack(List<List<Integer>> list, List<Integer> arrayList, int[] candidates, int target, int idx) {
-        if (target < 0) {
+    private void backtrack(int[] candidates, int index, int sum, int targetSum) {
+        if (sum == targetSum) {
+            ans.add(new ArrayList<>(list));
             return;
-        } else if (target == 0) {
-            list.add(new ArrayList<>(arrayList));
-        } else {
-            for (int i = idx; i < candidates.length; i++) {
-                // 跳过重复的元素
-                if (i > idx && candidates[i] == candidates[i-1]) continue;
-                arrayList.add(candidates[i]);
-                backtrack(list, arrayList, candidates, target - candidates[i], i + 1);
-                arrayList.remove(arrayList.size() - 1);
-            }
+        }
+
+        for (int i = index; i < candidates.length; i++) {
+            if (sum + candidates[i] > targetSum) break; // 剪枝
+            if (i > index && candidates[i] == candidates[i - 1]) continue; // 避免当前数字被选两次
+
+            list.add(candidates[i]);
+            sum += candidates[i];
+            backtrack(candidates, i + 1, sum, targetSum);
+            list.remove(list.size() - 1);
+            sum -= candidates[i];
         }
     }
 }
 // @lc code=end
-

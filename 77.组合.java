@@ -26,12 +26,16 @@ class Solution {
             ans.add(new ArrayList<>(subset));
             return;
         }
-        // if (index > n) return;
         
-        backtrack(index + 1, n, k);
-        subset.add(index);
-        backtrack(index + 1, n, k);
-        subset.remove(subset.size() - 1);
+        for (int i = index; i <= n; i++) {
+            subset.add(i);
+            backtrack(i + 1, n, k);
+            subset.remove(subset.size() - 1);
+        }
+        // backtrack(index + 1, n, k);
+        // subset.add(index);
+        // backtrack(index + 1, n, k);
+        // subset.remove(subset.size() - 1);
     }
 }
 // @lc code=end

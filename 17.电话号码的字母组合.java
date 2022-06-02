@@ -11,7 +11,7 @@ import java.util.Map;
 
 // @lc code=start
 class Solution {
-    private Map<Character, String> phoneMap = new HashMap<Character, String>() {{
+    private Map<Character, String> map = new HashMap<Character, String>() {{
         put('2', "abc");
         put('3', "def");
         put('4', "ghi");
@@ -21,26 +21,28 @@ class Solution {
         put('8', "tuv");
         put('9', "wxyz");
     }};
+    private List<String> ans = new ArrayList<String>();
+    private StringBuilder sb = new StringBuilder();
 
     public List<String> letterCombinations(String digits) {
-        List<String> ans = new ArrayList<String>();
         if (digits.length() == 0) return ans;
         
-        backtrack(ans, digits, 0, new StringBuffer());
+        backtrack(digits, 0, sb);
         return ans;
     }
 
-    public void backtrack(List<String> combinations, String digits, int index, StringBuffer combination) {
+    public void backtrack(String digits, int index, StringBuilder sb) {
         if (index == digits.length()) {
-            combinations.add(combination.toString());
-        } else {
-            char digit = digits.charAt(index);
-            String letters = phoneMap.get(digit);
-            for (int i = 0; i < letters.length(); i++) {
-                combination.append(letters.charAt(i));
-                backtrack(combinations, digits, index + 1, combination);
-                combination.deleteCharAt(index);
-            }
+            ans.add(sb.toString());
+            return;
+        }
+
+        char digit = digits.charAt(index);
+        String letters = map.get(digit);
+        for (int i = 0; i < letters.length(); i++) {
+            sb.append(letters.charAt(i));
+            backtrack(digits, index + 1, sb);
+            sb.deleteCharAt(index);
         }
     }
 }

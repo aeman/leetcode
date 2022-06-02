@@ -18,14 +18,18 @@ class Solution {
     }
 
     public void backtrack(int index, int[] nums) {
-        if (index == nums.length) {
-            ans.add(new ArrayList<>(subset));
-            return;
+        ans.add(new ArrayList<>(subset));
+        if (index == nums.length) return;
+
+        for (int i = index; i < nums.length; i++) {
+            subset.add(nums[i]);
+            backtrack(i + 1, nums);
+            subset.remove(subset.size() - 1);
         }
-        backtrack(index + 1, nums);
-        subset.add(nums[index]);
-        backtrack(index + 1, nums);
-        subset.remove(subset.size() - 1);
+        // backtrack(index + 1, nums);
+        // subset.add(nums[index]);
+        // backtrack(index + 1, nums);
+        // subset.remove(subset.size() - 1);
     }
 }
 // @lc code=end

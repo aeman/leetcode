@@ -10,7 +10,7 @@ import java.util.List;
 // @lc code=start
 class Solution {
     private List<String> ans = new ArrayList<>();
-    private int[] path = new int[4];
+    private int[] ip = new int[4];
 
     public List<String> restoreIpAddresses(String s) {
         backtrack(s, 0, 0);
@@ -20,7 +20,7 @@ class Solution {
     private void backtrack(String s, int index, int segment) {
         if (segment == 4) {
             if (index == s.length()) {
-                ans.add(path[0] + "." + path[1] + "." + path[2] + "." + path[3]);
+                ans.add(ip[0] + "." + ip[1] + "." + ip[2] + "." + ip[3]);
             }
             return;
         }
@@ -32,7 +32,7 @@ class Solution {
             if (val > 255 || (len >= 2 && s.charAt(index) == '0'))
                 break;
 
-            path[segment] = val;
+            ip[segment] = val;
             backtrack(s, index + len, segment + 1);
         }
     }

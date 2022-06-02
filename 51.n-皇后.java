@@ -12,17 +12,18 @@ import java.util.Set;
 
 // @lc code=start
 class Solution {
-    Set<Integer> col = new HashSet<>();
-    Set<Integer> diag1 = new HashSet<>();
-    Set<Integer> diag2 = new HashSet<>();
+    private List<List<String>> ans = new ArrayList<>();
+    private List<String> list = new ArrayList<>();
+    private Set<Integer> col = new HashSet<>();
+    private Set<Integer> diag1 = new HashSet<>();
+    private Set<Integer> diag2 = new HashSet<>();
 
     public List<List<String>> solveNQueens(int n) {
-        List<List<String>> ans = new ArrayList<>();
-        backtrack(ans, new ArrayList<>(), 0, n);
+        backtrack(0, n);
         return ans;
     }
 
-    private void backtrack(List<List<String>> ans, List<String> list, int row, int n) {
+    private void backtrack(int row, int n) {
         if (row == n) {
             ans.add(new ArrayList<>(list));
             return;
@@ -42,7 +43,7 @@ class Solution {
             diag1.add(row + i);
             diag2.add(row - i);
 
-            backtrack(ans, list, row + 1, n);
+            backtrack(row + 1, n);
 
             list.remove(list.size() - 1);
             col.remove(i);

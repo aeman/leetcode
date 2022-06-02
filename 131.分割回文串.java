@@ -34,7 +34,7 @@ class Solution {
 
     // 判断是否回文串
     private boolean isPalindrome(String s, int start, int end) {
-        while (start <= end) {
+        while (start < end) {
             if (s.charAt(start) != s.charAt(end))
                 return false;
             start++;
