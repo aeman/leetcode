@@ -32,14 +32,14 @@ class Solution {
             if (root.left == null) return root.right;
             if (root.right == null) return root.left;
             
-            if (root.left != null && root.right != null) {
+            // if (root.left != null && root.right != null) {
                 TreeNode min = root.right;
                 while (min.left != null) {
                     min = min.left;
                 }
                 min.left = root.left;
                 root = root.right;
-            }
+            // }
         }
 
         return root;
