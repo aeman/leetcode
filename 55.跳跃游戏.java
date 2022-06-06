@@ -8,12 +8,12 @@
 class Solution {
     public boolean canJump(int[] nums) {
         int reach = 0;
-        for (int i = 0; i < nums.length; i++) {
-            // 永远不可能到达最后位置
-            if (i > reach) return false;
-            reach = Math.max(reach, i + nums[i]);
+        for (int i = 0; i <= reach; i++) {
+            reach = Math.max(reach, nums[i] + i);
+            if (reach >= nums.length - 1)
+                return true;
         }
-        return true;
+        return false;
     }
 }
 // @lc code=end

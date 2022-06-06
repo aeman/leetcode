@@ -9,12 +9,12 @@ import java.util.Arrays;
 // @lc code=start
 class Solution {
     public int findMinArrowShots(int[][] points) {
-        Arrays.sort(points, (a, b) -> Integer.compare(a[1], b[1]));
-        int ans = 0, arrow = 0;
+        Arrays.sort(points, (a, b) -> Integer.compare(a[1], b[1])); // a[1] - b[1] 整型越界
+        int ans = 0, right = 0;
         for (int i = 0; i < points.length; i ++) {
-            if (ans == 0 || points[i][0] > arrow) {
+            if (ans == 0 || points[i][0] > right) {
                 ans ++;
-                arrow = points[i][1];
+                right = points[i][1];
             }
         }
         return ans;

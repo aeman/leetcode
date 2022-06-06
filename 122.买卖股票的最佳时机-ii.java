@@ -8,7 +8,20 @@
 class Solution {
     public int maxProfit(int[] prices) {
         int n = prices.length;
-        int dp0 = 0, dp1 = -prices[0];
+
+        // 1.greedy
+        // int[] profit = new int[n];
+        // for (int i = 1; i < n; i++) {
+        //     profit[i] = prices[i] - prices[i - 1];
+        // }
+        // int ans = 0;
+        // for (int p : profit) {
+        //     ans += p > 0 ? p : 0;
+        // }
+        // return ans;
+
+        // 2.dp
+        int dp0 = 0, dp1 = -prices[0];  //dp0持有现金 dp1持有股票
 
         for (int i = 1; i < n; i++) {
             int dp00 = Math.max(dp0, dp1 + prices[i]);
