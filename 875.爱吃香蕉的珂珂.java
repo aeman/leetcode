@@ -10,7 +10,8 @@ import java.util.Arrays;
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
         Arrays.sort(piles);
-        int low = 1, high = piles[piles.length - 1];    // 最少吃一根，最多吃数量最多的那一堆
+        // 最少吃一根，最多吃数量最多的那一堆
+        int low = 1, high = piles[piles.length - 1];
 
         while (low <= high) {
             int mid = (low + high) / 2, hours = 0;
