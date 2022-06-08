@@ -7,6 +7,7 @@
 // @lc code=start
 class Solution {
     public int fib(int n) {
+        // 1.dp
         // if (n == 0) return 0;
 
         // int[] dp = new int[n + 1];
@@ -19,13 +20,15 @@ class Solution {
 
         // return dp[n];
 
+        // 2.递归
         int[] memo = new int[n + 1];
         return helper(n, memo);
     }
 
     private int helper(int n, int[] memo) {
-        if (n == 0 || n == 1) return n;
         if (memo[n] != 0) return memo[n];
+        if (n == 0 || n == 1) return n;
+        
         memo[n] = helper(n - 1, memo) + helper(n - 2, memo);
         return memo[n];
     }
