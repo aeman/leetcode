@@ -13,7 +13,7 @@ class Solution {
     Random random = new Random();
     List<Integer> arr = new ArrayList<>();
     int[][] rects;
-    
+
     public Solution(int[][] rects) {
         this.rects = rects;
         arr.add(0);
@@ -22,7 +22,7 @@ class Solution {
             arr.add(arr.get(arr.size() - 1) + (x - a + 1) * (y - b + 1));
         }
     }
-    
+
     public int[] pick() {
         int k = random.nextInt(arr.get(arr.size() - 1));
         int rectIndex = binarySearch(arr, k + 1) - 1;
@@ -32,7 +32,7 @@ class Solution {
         int col = y - b + 1;
         int da = k / col;
         int db = k - col * da;
-        return new int[]{a + da, b + db};
+        return new int[] { a + da, b + db };
     }
 
     private int binarySearch(List<Integer> arr, int target) {
@@ -58,4 +58,3 @@ class Solution {
  * int[] param_1 = obj.pick();
  */
 // @lc code=end
-
