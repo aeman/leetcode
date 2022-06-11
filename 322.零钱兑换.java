@@ -11,6 +11,7 @@ class Solution {
     public int coinChange(int[] coins, int amount) {
         if (coins.length == 0) return -1;
 
+        // // 1.memo
         // // dp[n]的值： 表示的凑成总金额为n所需的最少的硬币个数
         // int[] memo = new int[amount + 1];
         // memo[0] = 0;
@@ -31,16 +32,17 @@ class Solution {
         // // memo[amount]等于最大值说明无法兑换
         // return (memo[amount] == Integer.MAX_VALUE) ? -1 : memo[amount];
 
+        // 2.dp
         int[] dp = new int[amount + 1];
-        Arrays.fill(dp, amount + 1);
+        Arrays.fill(dp, Integer.MAX_VALUE >> 1);
         dp[0] = 0;
-        for (int i = 0; i <= amount; i++) {
+        for (int i = 1; i <= amount; i++) {
             for (int coin : coins) {
                 if (i >= coin) dp[i] = Math.min(dp[i], dp[i - coin] + 1);
             }
         }
 
-        return dp[amount] > amount ? - 1 : dp[amount];
+        return dp[amount] == Integer.MAX_VALUE >> 1 ? - 1 : dp[amount];
     }
 }
 // @lc code=end
