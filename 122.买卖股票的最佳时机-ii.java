@@ -10,28 +10,22 @@ class Solution {
         int n = prices.length;
 
         // 1.greedy
-        // int[] profit = new int[n];
-        // for (int i = 1; i < n; i++) {
-        //     profit[i] = prices[i] - prices[i - 1];
-        // }
         // int ans = 0;
-        // for (int p : profit) {
-        //     ans += p > 0 ? p : 0;
+        // for (int i = 1; i < n; i++) {
+        //     ans += Math.max(0, prices[i] - prices[i - 1]);
         // }
         // return ans;
 
         // 2.dp
-        int dp0 = 0, dp1 = -prices[0];  //dp0持有现金 dp1持有股票
-
+        int[][] dp = new int[n][2];
+        dp[0][0] = -prices[0];   //持有股票
+        dp[0][1] = 0;            //不持有股票
+            
         for (int i = 1; i < n; i++) {
-            int dp00 = Math.max(dp0, dp1 + prices[i]);
-            int dp11 = Math.max(dp1, dp0 - prices[i]);
-
-            dp0 = dp00;
-            dp1 = dp11;
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] - prices[i]);
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
         }
-
-        return dp0;
+        return dp[n - 1][1];
     }
 }
 // @lc code=end
