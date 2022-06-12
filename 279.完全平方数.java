@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /*
  * @lc app=leetcode.cn id=279 lang=java
  *
@@ -8,13 +10,13 @@
 class Solution {
     public int numSquares(int n) {
         int[] dp = new int[n + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
 
+        dp[0] = 0;
         for (int i = 1; i <= n; i++) {
-            int minNum = Integer.MAX_VALUE;
             for (int j = 1; j * j <= i; j++) {
-                minNum = Math.min(minNum, dp[i - j * j]);
-            }
-            dp[i] = minNum + 1;
+                dp[i] = Math.min(dp[i], dp[i - j * j] + 1);
+            }   
         }
 
         return dp[n];
