@@ -27,6 +27,7 @@ class Solution {
     // private Map<TreeNode, Integer> map = new HashMap<>();
     
     public int rob(TreeNode root) {
+        // 1.memo
         // if (root == null) return 0;
         // if (map.containsKey(root)) return map.get(root);
 
@@ -43,6 +44,7 @@ class Solution {
         // map.put(root, max);
         // return max;
 
+        // 2.dp
         int[] dp = dfs(root);
         return Math.max(dp[0], dp[1]);  // 0表示不抢，1表示抢
     }

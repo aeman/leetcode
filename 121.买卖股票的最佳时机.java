@@ -7,26 +7,28 @@
 // @lc code=start
 class Solution {
     public int maxProfit(int[] prices) {
-        int maxProfit = 0;
+        int ans = 0;
 
-        int minPrice = prices[0];
-        for (int i = 0; i < prices.length; i++) {
-            maxProfit = Math.max(maxProfit, prices[i] - minPrice);
-            minPrice = Math.min(minPrice, prices[i]);
+        // 1.greedy
+        // int minPrice = Integer.MAX_VALUE;
+        // for (int i = 0; i < prices.length; i++) {
+        //     minPrice = Math.min(minPrice, prices[i]);
+        //     ans = Math.max(ans, prices[i] - minPrice);
+        // }
+
+        // 2.dp
+        int bought = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > bought) {
+                if (ans < (prices[i] - bought)) {
+                    ans = prices[i] - bought;
+                }
+            } else {
+                bought = prices[i];
+            }
         }
         
-        // int bought = prices[0];
-        // for (int i = 1; i < prices.length; i++) {
-        //     if (prices[i] > bought) {
-        //         if (maxProfit < (prices[i] - bought)) {
-        //             maxProfit = prices[i] - bought;
-        //         }
-        //     } else {
-        //         bought = prices[i];
-        //     }
-        // }
-        
-        return maxProfit;
+        return ans;
     }
 }
 // @lc code=end
