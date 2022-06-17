@@ -29,10 +29,9 @@ class Solution {
         if (root == null) return 0;
 
         path = path * 10 + root.val;
-        if (root.left == null && root.right == null) return  path;
+        if (root.left == null && root.right == null) return path;
 
-        return dfs(root.left, path)  + dfs(root.right, path);
+        return dfs(root.left, path) + dfs(root.right, path);
     }
 }
 // @lc code=end
-
