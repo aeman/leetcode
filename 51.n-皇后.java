@@ -37,8 +37,8 @@ class Solution {
             Arrays.fill(arr, '.');
             arr[i] = 'Q';
             String rowString = new String(arr);
-
             list.add(rowString);
+            
             col.add(i);
             diag1.add(row + i);
             diag2.add(row - i);
