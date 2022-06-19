@@ -3,8 +3,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.event.AncestorEvent;
-
 /*
  * @lc app=leetcode.cn id=652 lang=java
  *
