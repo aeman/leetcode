@@ -1,5 +1,5 @@
 import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.Deque;
 
 /*
  * @lc app=leetcode.cn id=785 lang=java
@@ -24,7 +24,7 @@ class Solution {
     }
 
     private void bfs(int[][] graph, int i, int[] colors, int color) {
-        Queue<Integer> queue = new ArrayDeque<>();
+        Deque<Integer> queue = new ArrayDeque<>();
         queue.offer(i);
         colors[i] = color;
 
