@@ -40,7 +40,7 @@ class Solution {
         board[i][j] = '#';
         for (int[] dir : dirs) {
             int x = i + dir[0], y = j + dir[1];
-            if (x >= 0 && x < board.length && y >= 0 && y < board[0].length) {
+            if (x >= 0 && x < board.length && y >= 0 && y < board[0].length && board[x][y] != '#') {
                 dfs(board, trie, x, y, set);
             }
         }
@@ -55,12 +55,12 @@ class Solution {
             Trie trie = this;
             for (int i = 0; i < word.length(); i++) {
                 int index = word.charAt(i) - 'a';
-                if (children[index] == null) {
-                    children[index] = new Trie();
+                if (trie.children[index] == null) {
+                    trie.children[index] = new Trie();
                 }
                 trie = trie.children[index];
             }
-            this.word = word;
+            trie.word = word;
         }
     }
 }

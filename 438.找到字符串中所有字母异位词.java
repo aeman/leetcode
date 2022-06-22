@@ -27,7 +27,7 @@ class Solution {
         if (Arrays.equals(sArr, pArr)) list.add(0);
 
         for (int i = n; i < s.length(); i++) {
-            sArr[s.charAt(i - p.length()) - 'a']--;
+            sArr[s.charAt(i - n) - 'a']--;
             sArr[s.charAt(i) - 'a']++;
             if (Arrays.equals(sArr, pArr)) {
                 list.add(i - n + 1);
