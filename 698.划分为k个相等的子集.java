@@ -9,12 +9,10 @@ import java.util.Arrays;
 // @lc code=start
 class Solution {
     public boolean canPartitionKSubsets(int[] nums, int k) {
-        int sum = 0;
+        int sum = Arrays.stream(nums).sum();
         boolean[] used = new boolean[nums.length];
-        Arrays.sort(nums);
-        for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-        }
+        // Arrays.sort(nums);
+
         if (sum % k != 0)
             return false;
         int target = sum / k;

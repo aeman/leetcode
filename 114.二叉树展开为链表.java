@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * @lc app=leetcode.cn id=114 lang=java
  *
@@ -22,22 +25,21 @@
  */
 class Solution {
     public void flatten(TreeNode root) {
-        if (root == null) return;
-
-        flatten(root.left);
-        flatten(root.right);
-
-        TreeNode left = root.left;
-        TreeNode right = root.right;
-        root.left = null;
-        root.right = left;
-
-        TreeNode cur = root;
-        while (cur.right != null) {
-            cur = cur.right;
+        List<TreeNode> list = new ArrayList<>();
+        preorder(root, list);
+        
+        for (int i = 1; i < list.size(); i++) {
+            TreeNode prev = list.get(i - 1), curr = list.get(i);
+            prev.left = null;
+            prev.right = curr;
         }
-        // 把原来右子树接到当前右节点末端
-        cur.right = right;
+    }
+
+    private void preorder(TreeNode root, List<TreeNode> list) {
+        if (root == null) return;
+        list.add(root);
+        preorder(root.left, list);
+        preorder(root.right, list);
     }
 }
 // @lc code=end
