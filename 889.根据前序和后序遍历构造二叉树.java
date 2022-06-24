@@ -24,29 +24,32 @@ import java.util.Map;
  * }
  */
 class Solution {
+	private int[] preorder;
+	private Map<Integer, Integer> map = new HashMap<>();
+
 	public TreeNode constructFromPrePost(int[] preorder, int[] postorder) {
+		this.preorder = preorder;
         int n = preorder.length;
 
-        Map<Integer, Integer> map = new HashMap<>();
 		for (int i = 0; i < postorder.length; i++) {
 			map.put(postorder[i], i);
 		}
 
-		TreeNode root = buildTree(preorder, 0, n - 1, postorder, 0, n - 1, map);
+		TreeNode root = build(0, n - 1, 0, n - 1);
         return root;
     }
 	
-	public TreeNode buildTree(int[] preorder, int preLeft, int preRight, int[] postorder, int postLeft, int postRight, Map<Integer, Integer> map) {
-		if (postLeft > postRight || preLeft > preRight) return null;
+	private TreeNode build(int preLeft, int preRight, int postLeft, int postRight) {
+		if (preLeft > preRight || postLeft > postRight) return null;
 		
         TreeNode root = new TreeNode(preorder[preLeft]);
         // 关键一句
         if (preLeft == preRight) return root;
 		int index = map.get(preorder[preLeft + 1]);
-        int numsLeft = index - postLeft;
+        int numsLeft = index - postLeft + 1;
 		
-		root.left = buildTree(preorder, preLeft + 1, preLeft + numsLeft + 1, postorder, postLeft, index, map);
-		root.right = buildTree(preorder, preLeft + numsLeft + 2, preRight, postorder, index + 1, postRight - 1, map);
+		root.left = build(preLeft + 1, preLeft + numsLeft, postLeft, index);
+		root.right = build(preLeft + 1 + numsLeft, preRight, index + 1, postRight - 1);
 		
 		return root;
 	}

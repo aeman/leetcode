@@ -24,27 +24,30 @@ import java.util.Map;
  * }
  */
 class Solution {
+    private int[] postorder;
+    private Map<Integer, Integer> map = new HashMap<>();
+
     public TreeNode buildTree(int[] inorder, int[] postorder) {
+        this.postorder = postorder;
         int n = inorder.length;
 
-        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < n; i++) {
             map.put(inorder[i], i);
         }
 
-        TreeNode root = build(inorder, 0, n - 1, postorder, 0, n - 1, map);
+        TreeNode root = build(0, n - 1, 0, n - 1);
         return root;
     }
 
-    public TreeNode build(int[] inorder, int inLeft, int inRight, int[] postorder, int postLeft, int postRight, Map<Integer, Integer> map) {
-        if (postLeft > postRight || inLeft > inRight) return null;
+    private TreeNode build(int inLeft, int inRight, int postLeft, int postRight) {
+        if (inLeft > inRight || postLeft > postRight) return null;
 
         TreeNode root = new TreeNode(postorder[postRight]);
-        int inRoot = map.get(root.val);
-        int numsLeft = inRoot - inLeft;
+        int index = map.get(root.val);
+        int numsLeft = index - inLeft;
 
-        root.left = build(inorder, inLeft, inRoot - 1, postorder, postLeft, postLeft + numsLeft - 1, map);
-        root.right = build(inorder, inRoot + 1, inRight, postorder, postLeft + numsLeft, postRight - 1, map);
+        root.left = build(inLeft, index - 1, postLeft, postLeft + numsLeft - 1);
+        root.right = build(index + 1, inRight, postLeft + numsLeft, postRight - 1);
 
         return root;
     }
