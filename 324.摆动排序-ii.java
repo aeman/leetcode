@@ -18,7 +18,6 @@ class Solution {
             nums[i] = j;
             bucket[j]--;
         }
-
         for (int i = 0; i < nums.length; i += 2) {
             while (bucket[j] == 0) j--;
             nums[i] = j;
