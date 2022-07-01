@@ -16,15 +16,15 @@ class Solution {
             char c = expression.charAt(i);
             if (c == '+' || c == '-' || c == '*') {
                 String part1 = expression.substring(0, i), part2 = expression.substring(i + 1);
-                List<Integer> part1List = diffWaysToCompute(part1), part2List = diffWaysToCompute(part2);
+                List<Integer> leftList = diffWaysToCompute(part1), rightList = diffWaysToCompute(part2);
 
-                for (Integer i1 : part1List) {
-                    for (Integer i2 : part2List) {
+                for (int left : leftList) {
+                    for (int right : rightList) {
                         int ret = 0;
                         switch (expression.charAt(i)) {
-                            case '+': ret = i1 + i2; break;
-                            case '-': ret = i1 - i2; break;
-                            case '*': ret = i1 * i2; break;
+                            case '+': ret = left + right; break;
+                            case '-': ret = left - right; break;
+                            case '*': ret = left * right; break;
                         }
                         list.add(ret);
                     }
