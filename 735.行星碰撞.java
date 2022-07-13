@@ -13,13 +13,14 @@ class Solution {
         Deque<Integer> stack = new ArrayDeque<>();
 
         for (int a : asteroids) {
+            // 右向左穿透
             while (!stack.isEmpty() && stack.peek() > 0 && stack.peek() < -a) {
                 stack.pop();
             }
 
-            if (!stack.isEmpty() && a < 0 && stack.peek() == -a) {
+            if (!stack.isEmpty() && a < 0 && stack.peek() == -a) {  // 左右同归于尽
                 stack.pop();
-            } else if (stack.isEmpty() || stack.peek() < 0 || a > 0) {
+            } else if (stack.isEmpty() || stack.peek() < 0 || a > 0) {  // 不会发生碰撞的三种情况
                 stack.push(a);
             }
         }
