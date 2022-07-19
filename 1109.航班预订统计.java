@@ -7,6 +7,7 @@
 // @lc code=start
 class Solution {
     public int[] corpFlightBookings(int[][] bookings, int n) {
+        // 利用差分数组diff设置订购数量
         int[] diff = new int[n];
         for (int k = 0; k < bookings.length; k++) {
             int i = bookings[k][0], j = bookings[k][1], val = bookings[k][2];
@@ -16,6 +17,7 @@ class Solution {
             }
         }
 
+        // 差分数组还原订购数组
         int[] ans = new int[n];
         ans[0] = diff[0];
         for (int i = 1; i < n; i++) {

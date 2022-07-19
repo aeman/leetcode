@@ -15,6 +15,7 @@ class MyCalendarTwo {
     }
     
     public boolean book(int start, int end) {
+        // 利用差分数组思想
         events.put(start, events.getOrDefault(start, 0) + 1);
         events.put(end, events.getOrDefault(end, 0) - 1);
 
