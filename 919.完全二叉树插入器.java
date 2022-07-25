@@ -25,11 +25,10 @@ import java.util.Queue;
  */
 class CBTInserter {
     private TreeNode root;
-    private Queue<TreeNode> queue;
+    private Queue<TreeNode> queue = new ArrayDeque<>();
 
     public CBTInserter(TreeNode root) {
         this.root = root;
-        this.queue = new ArrayDeque<>();
         queue.offer(root);
 
         // 队列中只保留 没有孩子 或者 孩子不全 的节点
