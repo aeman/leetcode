@@ -31,22 +31,22 @@ class Solution {
         // return sb.length();
 
         // 2.双指针
-        int p  = 0, q = 0, n = chars.length;
-        while (q < n) {
-            char cur = chars[q];
+        int left = 0, right = 0, n = chars.length;
+        while (right < n) {
+            char cur = chars[right];
             int cnt = 0;
-            while (q < n && chars[q] == cur) {
+            while (right < n && chars[right] == cur) {
                 cnt++;
-                q++;
+                right++;
             }
-            chars[p++] = cur;
+            chars[left++] = cur;
             if (cnt > 1) {
                 for (char c : (cnt + "").toCharArray()) {
-                    chars[p++] = c;
+                    chars[left++] = c;
                 }
             }
         }
-        return p;
+        return left;
     }
 }
 // @lc code=end

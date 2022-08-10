@@ -38,6 +38,7 @@ class Solution {
         if (root != null) queue.offer(root);
         while (!queue.isEmpty()) {
             int size = queue.size();
+            // 每一层的最后一个节点即右视图
             ans.add(queue.peekLast().val);
             for (int i = 0; i < size; i++) {
                 TreeNode node = queue.poll();

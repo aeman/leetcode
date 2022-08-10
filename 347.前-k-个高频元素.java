@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -17,7 +18,7 @@ class Solution {
             map.put(i, map.getOrDefault(i, 0) + 1);
         }
 
-        Queue<int[]> queue = new PriorityQueue<>((a, b) -> a[1]- b[1]);
+        Queue<int[]> queue = new PriorityQueue<>(Comparator.comparing(e -> e[1]));
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             int num = entry.getKey(), count = entry.getValue();
             queue.offer(new int[]{num, count});

@@ -14,10 +14,8 @@ class Solution {
         }
 
         for (char c : ransomNote.toCharArray()) {
+            if (alphabet[c - 'a'] == 0) return false; 
             alphabet[c - 'a']--;
-            if (alphabet[c - 'a'] < 0) {
-                return false;
-            }
         }
 
         return true;

@@ -16,9 +16,9 @@ class Solution {
         int sum = 0;
         for (int i = 0; i < nums.length; i++) {
             sum += nums[i];
-            int mod = sum % k;
-            if (map.containsKey(mod) && i - map.get(mod) > 1) return true;
-            map.putIfAbsent(mod, i);
+            int reminder = sum % k;
+            if (map.containsKey(reminder) && i - map.get(reminder) >= 2) return true;
+            map.putIfAbsent(reminder, i);
         }
         return false;
     }

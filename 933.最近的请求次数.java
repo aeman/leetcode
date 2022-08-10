@@ -1,5 +1,5 @@
 import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Queue;
 
 /*
  * @lc app=leetcode.cn id=933 lang=java
@@ -9,18 +9,18 @@ import java.util.Deque;
 
 // @lc code=start
 class RecentCounter {
-    private Deque<Integer> stack;
+    private Queue<Integer> queue;
 
     public RecentCounter() {
-        stack = new ArrayDeque<>();
+        this.queue = new ArrayDeque<>();
     }
     
     public int ping(int t) {
-        stack.offer(t);
-        while (stack.peek() < t - 3000) {
-            stack.poll();
+        queue.offer(t);
+        while (queue.peek() < t - 3000) {
+            queue.poll();
         }
-        return stack.size();
+        return queue.size();
     }
 }
 

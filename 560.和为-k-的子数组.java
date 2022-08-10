@@ -12,6 +12,7 @@ class Solution {
     public int subarraySum(int[] nums, int k) {
         int n = nums.length, ans = 0, pre = 0;
 
+        // 1.前缀和
         // int[] preSum = new int[n + 1];
         // for (int i = 1; i <= n; i++) {
         //     preSum[i] = preSum[i - 1] + nums[i - 1];
@@ -24,6 +25,7 @@ class Solution {
         //     }
         // }
 
+        // 2.hash
         Map<Integer, Integer> map = new HashMap<>();
         map.put(0, 1);
 
