@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -23,24 +24,25 @@ class Solution {
         if (lists == null || lists.length == 0) return null;
 
         // 1.归并排序
-        return mergeLists(lists, 0, lists.length);
+        // return mergeLists(lists, 0, lists.length);
 
         // 2.小顶堆
-        // Queue<ListNode> queue = new PriorityQueue<>(lists.length, (o1, o2) -> o1.val - o2.val);
+        Queue<ListNode> queue = new PriorityQueue<>(Comparator.comparing(e -> e.val));
 
-        // ListNode dummy = new ListNode(0), cur = dummy;
-        // for (ListNode node : lists) {
-        //     if (node != null) queue.offer(node);
-        // }
+        ListNode dummy = new ListNode(0), cur = dummy;
+        for (ListNode node : lists) {
+            while (node != null) {
+                queue.offer(node);
+                node = node.next;
+            }
+        }
         
-        // while (!queue.isEmpty()) {
-        //     ListNode node = queue.poll();
-        //     cur.next = node;
-        //     if (node.next != null) queue.offer(node.next);
-
-        //     cur = cur.next;
-        // }
-        // return dummy.next;
+        while (!queue.isEmpty()) {
+            cur.next = queue.poll();
+            cur = cur.next;
+        }
+        cur.next = null;    // 必须截断，否则死循环
+        return dummy.next;
     }
 
     private ListNode mergeLists(ListNode[] lists, int start, int end) {

@@ -23,14 +23,15 @@ class Solution {
 
         ListNode mid = findMid(head), midNext = mid.next;
         mid.next = null;
-        ListNode p2 = reverse(midNext);
+        ListNode p1 = head, p2 = reverse(midNext);
 
-        ListNode p1 = head, temp;
         while (p1 != null && p2 != null) {
-            temp = p1.next;
+            ListNode t1 = p1.next, t2 = p2.next;
             p1.next = p2;
-            p1 = p1.next;
-            p2 = temp;
+            p2.next = t1;
+
+            p1 = t1;
+            p2 = t2;
         }
     }
 
