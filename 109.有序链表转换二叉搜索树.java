@@ -32,10 +32,10 @@
  */
 class Solution {
     public TreeNode sortedListToBST(ListNode head) {
-        return buildTree(head, null);
+        return dfs(head, null);
     }
 
-    public TreeNode buildTree(ListNode head, ListNode tail) {
+    public TreeNode dfs(ListNode head, ListNode tail) {
         ListNode fast = head;
         ListNode slow = head;
         if (head == tail) return null;
@@ -46,8 +46,8 @@ class Solution {
         }
 
         TreeNode node = new TreeNode(slow.val);
-        node.left = buildTree(head, slow);
-        node.right = buildTree(slow.next, tail);
+        node.left = dfs(head, slow);
+        node.right = dfs(slow.next, tail);
         return node;
     }
 }

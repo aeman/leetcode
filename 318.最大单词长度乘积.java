@@ -1,5 +1,3 @@
-import javax.swing.event.AncestorEvent;
-
 /*
  * @lc app=leetcode.cn id=318 lang=java
  *
@@ -20,7 +18,7 @@ class Solution {
 
         int ans = 0;
         for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < flag.length; j++) {
+            for (int j = i + 1; j < n; j++) {
                 if ((flag[i] & flag[j]) == 0) { // 这两个单词没有重复的char
                     int prod = words[i].length() * words[j].length();
                     ans = Math.max(ans, prod);

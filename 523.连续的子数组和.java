@@ -11,7 +11,7 @@ import java.util.Map;
 class Solution {
     public boolean checkSubarraySum(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, -1);
+        map.put(0, -1); // 恰好可以被k整除，余数为0
 
         int sum = 0;
         for (int i = 0; i < nums.length; i++) {

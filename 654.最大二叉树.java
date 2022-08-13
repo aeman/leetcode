@@ -39,10 +39,10 @@ class Solution {
         // }
         // return stack.isEmpty() ? null : stack.removeLast();
 
-        return construct(nums, 0, nums.length - 1);
+        return dfs(nums, 0, nums.length - 1);
     }
 
-    private TreeNode construct(int[] nums, int left, int right) {
+    private TreeNode dfs(int[] nums, int left, int right) {
         if (left > right) return null;
         if (left == right) return new TreeNode(nums[left]);
 
@@ -52,8 +52,8 @@ class Solution {
         }
 
         TreeNode root = new TreeNode(nums[maxIndex]);
-        root.left = construct(nums, left, maxIndex - 1);
-        root.right = construct(nums, maxIndex + 1, right);
+        root.left = dfs(nums, left, maxIndex - 1);
+        root.right = dfs(nums, maxIndex + 1, right);
         return root;
     }
 }

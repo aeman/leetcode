@@ -22,19 +22,19 @@
  */
 class Solution {
     public boolean isBalanced(TreeNode root) {
-        return (bottom(root)) != -1;
+        return dfs(root) != -1;
 
         // if (root == null) return true;
         // return Math.abs(depth(root.left) - depth(root.right)) <= 1 && isBalanced(root.left) && isBalanced(root.right);
     }
 
-    private int bottom(TreeNode root) {
+    private int dfs(TreeNode root) {
         if (root == null) return 0;
 
-        int left = bottom(root.left);
+        int left = dfs(root.left);
         if (left == -1) return -1;
 
-        int right = bottom(root.right);
+        int right = dfs(root.right);
         if (right == -1) return -1;
 
         return Math.abs(left - right) >= 2 ? -1 : Math.max(left, right) + 1;
