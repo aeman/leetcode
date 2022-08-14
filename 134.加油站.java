@@ -10,9 +10,9 @@ import java.util.Arrays;
 class Solution {
     public int canCompleteCircuit(int[] gas, int[] cost) {
         int sumGas = Arrays.stream(gas).sum(), sumCost = Arrays.stream(cost).sum();
+        
         // 总油量小于总油耗，一定无解
-        if (sumGas < sumCost)
-            return -1;
+        if (sumGas < sumCost) return -1;
 
         // 轮询加油站，找到出发点
         int start = 0, car = 0;

@@ -25,7 +25,7 @@ class Solution {
 
         // return dp[n];
 
-        // 2.recursion
+        // 2.memo
         if (n == 0 || n == 1) return 1;
         if (map.containsKey(n)) return map.get(n);
 
