@@ -19,19 +19,19 @@ class Solution {
         return ans;
     }
 
-    private void backtrack(int[] candidates, int index, int sum, int targetSum) {
-        if (sum == targetSum) {
+    private void backtrack(int[] candidates, int index, int sum, int target) {
+        if (sum == target) {
             ans.add(new ArrayList<>(list));
             return;
         }
 
         for (int i = index; i < candidates.length; i++) {
-            if (sum + candidates[i] > targetSum) break; // 剪枝
+            if (sum + candidates[i] > target) break; // 剪枝
             if (i > index && candidates[i] == candidates[i - 1]) continue; // 避免当前数字被选两次
 
             list.add(candidates[i]);
             sum += candidates[i];
-            backtrack(candidates, i + 1, sum, targetSum);
+            backtrack(candidates, i + 1, sum, target);
             list.remove(list.size() - 1);
             sum -= candidates[i];
         }

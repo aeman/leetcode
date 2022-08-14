@@ -19,18 +19,18 @@ class Solution {
         return ans;
     }
 
-    private void backtrack(int[] candidates, int index, int sum, int targetSum) {
-        if (sum == targetSum) {
+    private void backtrack(int[] candidates, int index, int sum, int target) {
+        if (sum == target) {
             ans.add(new ArrayList<>(list));
             return;
         }
 
         for (int i = index; i < candidates.length; i++) {
-            if (sum + candidates[i] > targetSum) break; // 剪枝
+            if (sum + candidates[i] > target) break; // 剪枝
 
             list.add(candidates[i]);
             sum += candidates[i];
-            backtrack(candidates, i, sum, targetSum);   // 可以重复，不用i+1
+            backtrack(candidates, i, sum, target);   // 可以重复，不用i+1
             list.remove(list.size() - 1);
             sum -= candidates[i];
         }

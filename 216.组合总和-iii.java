@@ -17,15 +17,15 @@ class Solution {
         return ans;
     }
 
-    private void backtrack(int index, int sum, int k, int targetSum) {
-        // 剪枝
+    private void backtrack(int index, int sum, int k, int target) {
+        // 剩下的数字全加上也不够，剪枝
         if (list.size() + (9 - index + 1) < k) {
             return;
         }
 
         if (list.size() == k) {
             // int curSum = list.stream().mapToInt(x -> x).sum();
-            if (sum == targetSum) {
+            if (sum == target) {
                 ans.add(new ArrayList<>(list));
             }
             return;
@@ -34,7 +34,7 @@ class Solution {
         for (int i = index; i <= 9; i++) {
             list.add(i);
             sum += i;
-            backtrack(i + 1, sum, k, targetSum);
+            backtrack(i + 1, sum, k, target);
             list.remove(list.size() - 1);
             sum -= i;
         }
