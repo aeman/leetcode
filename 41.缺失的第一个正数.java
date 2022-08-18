@@ -8,11 +8,12 @@
 class Solution {
     public int firstMissingPositive(int[] nums) {
         int n = nums.length;
+        // 先修改数组中负数为大于n的正数
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] <= 0) {
                 nums[i] = n + 1;
             }
-            System.out.print(nums[i]);
+            // System.out.print(nums[i]);
         }
         for (int i = 0; i < nums.length; i++) {
             int num = Math.abs(nums[i]);
