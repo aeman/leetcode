@@ -15,7 +15,8 @@ class Solution {
         for (int i = 1; i <= n; i++) {
             dp[i] = dp[i - 1];
             while (index < rides.length && rides[index][1] <= i) {
-                dp[i] = Math.max(dp[i], dp[rides[index][0]] + rides[index][1] - rides[index][0] + rides[index][2]);
+                int fee = rides[index][1] - rides[index][0] + rides[index][2];
+                dp[i] = Math.max(dp[i], dp[rides[index][0]] + fee);
                 index++;
             }
         }

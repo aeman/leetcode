@@ -26,6 +26,7 @@ import java.util.LinkedList;
  */
 class Solution {
     public TreeNode constructMaximumBinaryTree(int[] nums) {
+        // 1.bfs
         // Deque<TreeNode> stack = new ArrayDeque<>();
         // for (int n : nums){
         //     TreeNode cur = new TreeNode(n);
@@ -39,6 +40,7 @@ class Solution {
         // }
         // return stack.isEmpty() ? null : stack.removeLast();
 
+        // 2.dfs
         return dfs(nums, 0, nums.length - 1);
     }
 
