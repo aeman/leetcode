@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /*
  * @lc app=leetcode.cn id=655 lang=java
@@ -24,15 +25,17 @@ import java.util.Arrays;
  * }
  */
 class Solution {
+    private String[][] res;
+    
     public List<List<String>> printTree(TreeNode root) {
         int height = getHeight(root);
-        String[][] res = new String[height][(1 << height) - 1];
+        res = new String[height][(1 << height) - 1];
         for (String[] arr : res) {
             Arrays.fill(arr, "");
         }
 
         List<List<String>> ans = new ArrayList<>();
-        fill(res, root, 0, 0, res[0].length);
+        fill(root, 0, 0, res[0].length);
         for (String[] arr : res) {
             ans.add(Arrays.asList(arr));
         }
@@ -44,11 +47,13 @@ class Solution {
         return Math.max(getHeight(node.right), getHeight(node.left)) + 1;
     }
 
-    public void fill(String[][] res, TreeNode root, int i, int l, int r) {
+    public void fill(TreeNode root, int index, int left, int right) {
         if (root == null) return;
-        res[i][(l + r) / 2] = String.valueOf(root.val);
-        fill(res, root.left, i + 1, l, (l + r) / 2);
-        fill(res, root.right, i + 1, (l + r + 1) / 2,  r);
+        res[index][(left + right) / 2] = String.valueOf(root.val);
+
+        int mid = (left + right) / 2;
+        fill(root.left, index + 1, left, mid);
+        fill(root.right, index + 1, mid + 1,  right);
     }
 }
 // @lc code=end
