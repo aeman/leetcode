@@ -7,10 +7,10 @@
 // @lc code=start
 class Solution {
     public int preimageSizeFZF(int k) {
-        int zeroInMid = 0, low = 0, high = (int) Math.pow(10, 9), mid;
+        int zeroInMid = 0, low = 0, high = (int) Math.pow(10, 9);
 
         while (low < high) {
-            mid = (low + high) / 2;
+            int mid = (low + high) / 2;
             zeroInMid = trailZero(mid);
 
             if (zeroInMid < k) {
