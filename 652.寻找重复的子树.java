@@ -34,15 +34,15 @@ class Solution {
     }
 
     private String traverse(TreeNode root, List<TreeNode> list, Map<String, Integer> map) {
-        if (root == null) return "#";
+        if (root == null)
+            return "#";
         String left = traverse(root.left, list, map), right = traverse(root.right, list, map);
         String key = root.val + "," + left + "," + right;
         map.put(key, map.getOrDefault(key, 0) + 1);
-        if (map.get(key) == 2)  {
+        if (map.get(key) == 2) {
             list.add(root);
         }
         return key;
     }
 }
 // @lc code=end
-
