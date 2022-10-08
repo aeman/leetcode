@@ -16,9 +16,7 @@ class Solution {
         Arrays.sort(nums1);
 
         // 排序并记录num2元素的原始位置
-        Queue<int[]> queue = new PriorityQueue<>((a, b) -> {
-            return b[1] - a[1];
-        });
+        Queue<int[]> queue = new PriorityQueue<>((a, b) -> b[1] - a[1]);
         for (int i = 0; i < n; i++) {
             queue.offer(new int[] { i, nums2[i] });
         }
