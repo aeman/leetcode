@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Comparator;
 
 /*
  * @lc app=leetcode.cn id=791 lang=java
@@ -19,7 +20,7 @@ class Solution {
             arr[i] = s.charAt(i);
         }
 
-        Arrays.sort(arr, (a, b) -> letters[a - 'a'] - letters[b - 'a']);
+        Arrays.sort(arr, Comparator.comparingInt(x -> letters[x - 'a']));
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < s.length(); i++) {
