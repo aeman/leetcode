@@ -14,9 +14,9 @@ class Solution {
         Arrays.sort(nums);
         long ans = 0;
         long x = nums[0], y = 2;
-        for (int j = 1; j < nums.length; j++) {
-            ans = (ans + nums[j] * (y - 1) - x) % MOD;
-            x = (x * 2 + nums[j]) % MOD;
+        for (int i = 1; i < nums.length; i++) {
+            ans = (ans + nums[i] * (y - 1) - x) % MOD;
+            x = (x * 2 + nums[i]) % MOD;
             y = y * 2 % MOD;
         }
         return (int) ((ans + MOD) % MOD);
