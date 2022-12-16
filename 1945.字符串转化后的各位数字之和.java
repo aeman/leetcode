@@ -13,13 +13,13 @@ class Solution {
             sb.append(ch - 'a' + 1);
         }
         String digits = sb.toString();
-        for (int i = 1; i <= k && digits.length() > 1; ++i) {
+        for (int i = 0; i < k && digits.length() > 1; ++i) {
             int sum = 0;
             for (int j = 0; j < digits.length(); ++j) {
                 char ch = digits.charAt(j);
                 sum += ch - '0';
             }
-            digits = Integer.toString(sum);
+            digits = String.valueOf(sum);
         }
 
         return Integer.parseInt(digits);
