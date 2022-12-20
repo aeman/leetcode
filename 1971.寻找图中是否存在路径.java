@@ -1,5 +1,7 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 /*
  * @lc app=leetcode.cn id=1971 lang=java
@@ -21,7 +23,25 @@ class Solution {
         }
 
         boolean[] visited = new boolean[n];
-        return dfs(source, destination, adj, visited);
+
+        // 1.bfs
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.offer(source);
+        visited[source] = true;
+        while (!queue.isEmpty()) {
+            int x = queue.poll();
+            if (x == destination) break;
+            for (int next : adj[x]) {
+                if (!visited[next]) {
+                    queue.offer(next);
+                    visited[next] = true;
+                }
+            }
+        }
+        return visited[destination];
+
+        // 2.dfs
+        // return dfs(source, destination, adj, visited);
     }
 
     private boolean dfs(int source, int destination, List<Integer>[] adj, boolean[] visited) {
