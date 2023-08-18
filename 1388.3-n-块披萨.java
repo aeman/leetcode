@@ -5,6 +5,9 @@
  */
 
 // @lc code=start
+
+import java.util.Arrays;
+
 class Solution {
     public int maxSizeSlices(int[] slices) {
         int[] v1 = new int[slices.length - 1];
